@@ -68,8 +68,8 @@ let c = a
 a = b
 b = c
 
-console.log(a)
-console.log(b)
+console.log(a) //o novo valor de a é 25
+console.log(b) //o novo valor de b é 10
 
 
 
