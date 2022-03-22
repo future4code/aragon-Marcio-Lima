@@ -59,6 +59,17 @@ console.log (pergunta3, " - ", resposta3)
 
 //Exercício 3:
 
+//introduzimos uma nova variável
+
+let a = 10
+let b = 25
+
+let c = a
+a = b
+b = c
+
+console.log(a)
+console.log(b)
 
 
 
