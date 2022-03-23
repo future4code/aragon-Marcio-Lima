@@ -65,7 +65,7 @@ console.log(idadeEmHoras)*/
 
 //Exercício 4:
 
-let n1 = prompt("Me fale um número")
+/*let n1 = prompt("Me fale um número")
 let n2 = prompt("Me fale outro número")
 console.log(n1, n2)
 
@@ -92,6 +92,7 @@ const condicao4 = n2 / n1
 
 console.log(p4)
 console.log(condicao4)
+*/
 
 
 
