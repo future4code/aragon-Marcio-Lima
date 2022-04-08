@@ -3,6 +3,9 @@
   *  ESTILOS GERAIS 
   *
   **/
+body {
+    font-family: roboto;
+}
 
 * {
     margin: 0;
@@ -26,7 +29,7 @@ button:focus {
 }
 
 img {
-    width: 100px;
+    width: 55px;
 }
 
 div>p:first-child {
@@ -34,7 +37,7 @@ div>p:first-child {
 }
 
 div img {
-    background: black;
+    background: none
 }
 
 .botao-amarelo {
@@ -57,6 +60,7 @@ div img {
 
 .icone {
     height: 15px;
+    width: 15px;
 }
 
 
@@ -69,16 +73,19 @@ div img {
 #container-de-descricao {
     background-color: #2274a5;
     color: white;
-    box-sizing: border-box;
     padding-top: 75px;
+    box-sizing: border-box;
 }
 
 #container-de-descricao>ol {
     padding: 15px 0px;
+    margin: auto;
 }
 
 #container-para-comprar {
     background-color: #e7eb90;
+    width: 100%;
+    padding: auto;
 }
 
 #container-para-comprar>p {
@@ -100,7 +107,9 @@ div:last-child {
 }
 
 table {
-    width: 60%;
+    width: 100%;
+    text-align: center;
+    /* bug-5 > text-align: center; */
 }
 
 td button {
@@ -109,6 +118,14 @@ td button {
     height: 30px;
     border-radius: 5px;
     color: black;
+}
+
+#btn1:hover, #btn2:hover, #btn3:hover {
+    background-color: #b69d31;
+}
+
+#btn1:active, #btn2:active, #btn3:active {
+    text-decoration: white;
 }
 
 .container-do-search {
