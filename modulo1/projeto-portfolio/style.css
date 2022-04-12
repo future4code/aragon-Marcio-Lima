@@ -195,3 +195,21 @@ footer {
     font-size: medium;
     line-height: 300%;
 }
+
+.box-xadrez {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+.pretas {
+    box-sizing: border-box;
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background-color: black;
+}
