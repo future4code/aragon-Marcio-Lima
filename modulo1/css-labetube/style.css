@@ -6,6 +6,8 @@
 }
 
 body {
+    width: 100vw;
+    display: grid;
     background-color: #45525B;;
 }
 
@@ -38,21 +40,23 @@ h1 {
 }
 
 main {
+    padding: 3px;
     display: grid;
+    column-width: 25vw;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 2vw;
-    column-gap: 2vh;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 3vw;
+    column-gap: 3vh;
     grid-column-start: 1;
     grid-column-end: 3;
-    margin: 0 auto;
     background-color: #45525B;;
 }
 
 .galeria {
-    width: 200px;
-    height: 200px;
-    align-content: center;
+    width: 10px;
+    height: 10px;
+    
+    align-items: center;
     text-align: center;
 
 }
