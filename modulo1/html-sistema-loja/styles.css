@@ -1,0 +1,71 @@
+body {
+    background-color: yellow;
+}
+
+.navegacao {
+    display: inline;
+    margin-right: 20px 10px 10px;
+}
+
+.boas-vindas {
+    margin-bottom: 10px;
+  
+}
+
+.texto-introdutorio {
+    line-height: 1px;
+    text-align: justify;
+}
+
+.margem {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.rodape {
+    font-size: small;
+    color: white;
+    text-shadow: 5pt;
+    margin-bottom: 20px;
+}
+
+.fone {
+    font-size: medium;
+    text-shadow: 5pt;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    text-align: center;
+    border: 2px solid black;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+
+h3 {
+    text-align: center;
+    margin-bottom: 1px;
+}
+
+button {
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 5px;
+    margin-top: 10px;
+    background-color: red;
+    color: white;
+}
+
+input {
+    margin-bottom: 10px;
+    box-sizing: content-box;
+}
+
+.footer-home {
+    background-image: linear-gradient(yellow, red);
+}
+
+ul {
+    line-height: 35px ;
+}
