@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "e1774436-953a-43f9-b7c5-4b42bb8f387a",
+		"name": "Labefy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createPlaylist",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "marcio-lima-aragon",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"The Story of Tropicália in 20 Albuns \"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",
+					"protocol": "https",
+					"host": [
+						"us-central1-labenu-apis",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"labefy",
+						"playlists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPlaylist",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "marcio-lima-aragon",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Rock Gaúcho - Bandas Gaúchas\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",
+					"protocol": "https",
+					"host": [
+						"us-central1-labenu-apis",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"labefy",
+						"playlists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPlaylist",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "marcio-lima-aragon",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Bluezera marota\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",
+					"protocol": "https",
+					"host": [
+						"us-central1-labenu-apis",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"labefy",
+						"playlists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPlaylists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "marcio-lima-aragon",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",
+					"protocol": "https",
+					"host": [
+						"us-central1-labenu-apis",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"labefy",
+						"playlists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addTrackToPlaylist",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "marcio-lima-aragon",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Stay Around a Little Longer (feat. B.B. King\",\n    \"artist\": \"Buddy Guy\",\n    \"url\": \"https://open.spotify.com/track/2ZbqUiXybgXiPJ9CZiG01B?si=dd6640481e894b0d\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/:playlistId/tracks",
+					"protocol": "https",
+					"host": [
+						"us-central1-labenu-apis",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"labefy",
+						"playlists",
+						":playlistId",
+						"tracks"
+					],
+					"variable": [
+						{
+							"key": "playlistId",
+							"value": "0ed932a2-2296-4eb9-80ed-17b185269f33"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPlaylists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "marcio-lima-aragon",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",
+					"protocol": "https",
+					"host": [
+						"us-central1-labenu-apis",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"labefy",
+						"playlists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPlaylistTracks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "marcio-lima-aragon",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/:playlistId/tracks",
+					"protocol": "https",
+					"host": [
+						"us-central1-labenu-apis",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"labefy",
+						"playlists",
+						":playlistId",
+						"tracks"
+					],
+					"variable": [
+						{
+							"key": "playlistId",
+							"value": "0ed932a2-2296-4eb9-80ed-17b185269f33"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchPlaylist",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "marcio-lima-aragon",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/search?name=string&=The Story of Tropicália in 20 Albuns",
+					"protocol": "https",
+					"host": [
+						"us-central1-labenu-apis",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"labefy",
+						"playlists",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "string"
+						},
+						{
+							"key": "",
+							"value": "The Story of Tropicália in 20 Albuns"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
