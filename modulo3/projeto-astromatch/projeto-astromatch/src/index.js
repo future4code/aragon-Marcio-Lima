@@ -5,8 +5,8 @@ import App from "./App";
 
 const GlobalStyle = createGlobalStyle`
 *{
-  margin: 0;
-  padding: 0;
+  margin: 5;
+  padding: 5;
   box-sizing: border-box;
   font-family: proxima-nova, sans-serif;
   font-style: normal;
