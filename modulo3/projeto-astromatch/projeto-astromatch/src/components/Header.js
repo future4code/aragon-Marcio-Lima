@@ -1,22 +1,32 @@
 import styled from "styled-components";
-import myLogo from "../assets/tinder-2.svg";
+import myLogo from "../assets/logo-fire.svg";
 
 const Title = styled.p`
   font-size: 35px;
   font-weight: 700;
-  display: flex;
+`;
+
+const Botao = styled.button`
+  font-size: 16px;
+  border: 3px solid #ff8fa6;
+  background-color: red;
+  color: white;
+  border-radius: 5em;
+  width: 10em;
+  height: 3em;
 `;
 
 export default function Header(props) {
   return (
     <>
-      <img src={myLogo} alt="logo" />
+      <img src={myLogo} alt="astromatch-logo" />
       <Title>Astromatch</Title>
-      {props.pagina === "perfil" ? (
-        <button onClick={props.vaiParaMatch}>Ir para perfis</button>
+      {props.page === "perfil" ? (
+        <Botao onClick={props.goToMatchesPage}>Ir para perfis</Botao>
       ) : (
-        <button onClick={props.vaiParaPerfil}>Ir para matches</button>
+        <Botao onClick={props.goToProfilePage}>Ir para matches</Botao>
       )}
+      <hr />
     </>
   );
 }

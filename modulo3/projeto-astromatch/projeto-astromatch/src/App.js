@@ -5,35 +5,35 @@ import Match from "./pages/Match";
 import Perfil from "./pages/Perfil";
 
 function App() {
-  const [inicio, setInicio] = useState("perfil");
+  const [home, setHome] = useState("match");
 
-  const vaiParaMatch = () => {
-    setInicio("match");
+  const goToMatchesPage = () => {
+    setHome("match");
   };
 
-  const vaiParaPerfil = () => {
-    setInicio("perfil");
+  const goToProfilePage = () => {
+    setHome("perfil");
   };
 
-  const mostrarPagina = () => {
-    switch (inicio) {
+  const displayPage = () => {
+    switch (home) {
       case "perfil":
-        return <Perfil />;
-      case "match":
         return <Match />;
+      case "match":
+        return <Perfil />;
       default:
         return alert("Página não encontrada, tente novamente.");
     }
   };
   return (
-    <div className="App">
+    <div>
       <nav>
         <Header
-          pagina={inicio}
-          vaiParaPerfil={vaiParaPerfil}
-          vaiParaMatch={vaiParaMatch}
+          page={home}
+          goToProfilePage={goToProfilePage}
+          goToMatchesPage={goToMatchesPage}
         />
-        {mostrarPagina()}
+        {displayPage()}
         <Footer />
       </nav>
     </div>
