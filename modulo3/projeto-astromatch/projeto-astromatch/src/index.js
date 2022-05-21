@@ -9,7 +9,9 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
   box-sizing: border-box;
   font-family: proxima-nova, sans-serif;
-  font-style: normal;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }`;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

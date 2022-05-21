@@ -1,4 +1,4 @@
-export const BASE_URL =
+export const base_URL =
   "https://us-central1-missao-newton.cloudfunctions.net/astroMatch";
 
-export const ALUNO = "marcio-lima-aragon";
+export const student = "marcio-lima-aragon";
