@@ -11,7 +11,7 @@ export default function Router() {
         <Routes>
           <Route path={"/"} element={<HomePage />} />
           <Route path={"/admin"} element={<AdminPage />} />
-          <Route path={"/trip/id"} element={<TripDetailsPage />} />
+          <Route path={"/admin/trip/details"} element={<TripDetailsPage />} />
           <Route path={"*"} element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

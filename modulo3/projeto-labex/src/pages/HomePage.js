@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CardTrip from "../components/CardTrip";
 import Header from "../components/Header";
 import { navigateToAdmin } from "../routes/cordinator";
-import TripDetailsPage from "./TripDetailsPage";
 
 export default function HomePage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigateToAdmin(navigate);
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <main>
@@ -19,7 +19,7 @@ export default function HomePage() {
       <hr />
       <h2>Inscreva-se numa nova viagem!</h2>
       <hr />
-      <TripDetailsPage />
+      <CardTrip />
     </main>
   );
 }
