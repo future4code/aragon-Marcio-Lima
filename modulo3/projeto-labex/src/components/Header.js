@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { navigateToHome } from "../routes/cordinator";
 import { requestLogin } from "../services/requests";
 
+const Main = styled.main`
+  margin: 1vw;`
 
 export default function Header() {
   const navigate = useNavigate()
@@ -36,7 +39,7 @@ export default function Header() {
     <button onClick={logout}>Logout</button>
   ) : (
     <form onSubmit={login}>
-      <label htmlFor={"email"} >Email:</label>
+      <label htmlFor={"email"}>E-mail:</label>
       <input
           id="email"
           name="email"
@@ -54,14 +57,14 @@ export default function Header() {
           onChange={handleInputValues}
       />
       <br />
-      <button type="submit">Login:</button>
+      <button type="submit">Login</button>
     </form>
   )
 
   return (
-    <main>
+    <Main>
       <h1>LabeX</h1>
       {renderizeHeader}
-    </main>
+    </Main>
   );
 }

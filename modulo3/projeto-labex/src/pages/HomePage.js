@@ -1,8 +1,14 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import CardTrip from "../components/CardTrip";
 import Header from "../components/Header";
 import { navigateToAdmin } from "../routes/cordinator";
+
+const Title = styled.h2`
+  position: relative;
+  margin: 0 auto;
+  width: fit-content;`
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -17,7 +23,7 @@ export default function HomePage() {
     <main>
       <Header />
       <hr />
-      <h2>Inscreva-se numa nova viagem!</h2>
+      <Title>Inscreva-se numa nova viagem!</Title>
       <hr />
       <CardTrip />
     </main>
