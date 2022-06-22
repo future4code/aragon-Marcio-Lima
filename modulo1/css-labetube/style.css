@@ -6,6 +6,16 @@
 }
 
 body {
+    background-color: #45525B;;
+}
+
+header {
+    display: flex;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #A8BBC6;
     background-color: #45525B;
 
 }
@@ -32,6 +42,17 @@ li {
 
 h1 {
     padding-left: 5vw;
+    color: #45525B;;
+}
+
+.icone {
+    margin-right: auto;
+    width: 8vw;
+    height: 8vh;
+}
+
+.busca {
+    padding-right: 1vw;
     color: #45525B;
 }
 
@@ -48,6 +69,35 @@ input {
 
 .button {
     padding-right: 5vw;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 2vw;
+    column-gap: 2vh;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin: 0 auto;
+    background-color: #45525B;;
+}
+
+.galeria {
+    width: 200px;
+    height: 200px;
+    align-content: center;
+    text-align: center;
+
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    padding-left: 1vw;
+    grid-column-start: 1;
+    grid-column-end: 3;
+=======
     cursor: pointer;
 }
 
@@ -94,6 +144,7 @@ footer {
 .icone-footer {
     margin-right: auto;
     width: 8vw;
+    height: 8vh;
     height: 7vh;
 }
 
