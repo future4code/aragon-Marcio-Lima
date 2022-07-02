@@ -1,11 +1,10 @@
-// ## Exercício 5
+type Usuario = {
+  name: string;
+  email: string;
+  role: string;
+};
 
-// Considerando o array de usuários a seguir, crie uma função que receba este array como parâmetro e
-// retorne uma lista com apenas os emails dos usuários de role “admin”.
-
-// - Array de usuários:
-
-[
+const usuarios = [
   { name: "Rogério", email: "roger@email.com", role: "user" },
   { name: "Ademir", email: "ademir@email.com", role: "admin" },
   { name: "Aline", email: "aline@email.com", role: "user" },
@@ -14,13 +13,16 @@
   { name: "Carina", email: "carina@email.com", role: "admin" },
 ];
 
-// - Entrada esperada → type[ ]
-// - Saída esperada → string[ ]
-// - Exemplo de saída:
+function retornaEmailsAdmin(usuarios: Usuario[]): string[] {
+  let listaDeEmails = usuarios
+    .filter((usuario) => {
+      return usuario.role === "admin";
+    })
+    .map((usuario) => {
+      return usuario.email;
+    });
 
-// ["ademir@email.com", "carina@email.com"]
+  return listaDeEmails;
+}
 
-// Dicas:
-
-// - Crie um type para os usuários.
-// - Use os métodos .filter() e .map()
+console.log(retornaEmailsAdmin(usuarios));
