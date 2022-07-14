@@ -1,42 +1,39 @@
 import connection from "./connection"
 
-const criarTabelaProdutos = async () => {
+const criarTabelaFuncionarios = async () => {
     try {
         await connection.raw(`
-            CREATE TABLE IF NOT EXISTS Produtos (
-            id INT PRIMARY KEY,
-            nome VARCHAR(255) NOT NULL,
-            preco DECIMAL(8, 2) NOT NULL,
-            categoria ENUM("acessórios", "calçados", "roupas") NOT NULL
+            CREATE TABLE IF NOT EXISTS Funcionarios (
+            id BIGINT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE,
             );
         `)
 
-        console.log("Tabela Produtos criada com sucesso.")
+        console.log("Tabela Funcionarios criada com sucesso.")
     } catch (error) {
-        console.log("Erro ao criar tabela Produtos.")
+        console.log("Erro ao criar tabela Funcionarios.")
         console.log(error.sqlMessage)
     }
 }
 
-async function popularTabelaProdutos() {
+async function popularTabelaFuncionarios() {
     try {
         await connection.raw(`
-            INSERT INTO Produtos (id, nome, preco, categoria)
+            INSERT INTO Funcionarios (id, name, email)
             VALUES 
-            (1, "Chinelo", 19.99, "calçados"),
-            (2, "Relógio", 30.00, "acessórios"),
-            (3, "Boné", 25.00, "acessórios"),
-            (4, "Camiseta", 49.99, "roupas"),
-            (5, "Calça", 99.00, "roupas");
+            (001, "Luana", "lua@lbn.com"),
+            (002, "Vinicius", "vini@lbn.com"),
+            (003, "Laura", "lau@lbn.com"),
         `)
 
-        console.log("Tabela Produtos populada com sucesso.")
+        console.log("Tabela Funcionarios populada com sucesso.")
     } catch (error) {
-        console.log("Erro ao popular tabela Produtos.")
+        console.log("Erro ao popular tabela Funcionarios.")
         console.log(error.sqlMessage)
     }
 }
 
-criarTabelaProdutos()
-    .then(() => popularTabelaProdutos())
+criarTabelaFuncionarios()
+    .then(() => popularTabelaFuncionarios())
     .finally(() => process.exit())
