@@ -17,14 +17,13 @@ export const getResponsibles = async (req: Request, res: Response) => {
         }
 
         const [result] = await connection.raw(`
-        SELECT
-        Users.id,
+        SELECT 
+        Users.id ,
         Users.nickname
-        Responsibles.
         FROM Users
         JOIN Responsibles
         ON Responsibles.userId = Users.id
-        WHERE Responsibles.taskId = ${taskId};
+        WHERE Tasks.id = ${taskId};
         `)
 
         res.status(200).send({
