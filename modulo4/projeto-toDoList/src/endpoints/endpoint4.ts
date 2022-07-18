@@ -4,16 +4,15 @@ import connection from "../database/connection";
 export const addResponsibleUsers = async (req: Request, res: Response) => {
     let errorCode = 400;
     try {
-        const taskId = req.params.taskId as string;
-        const userId = req.body.userId as string;
+        const taskId = req.params.taskId;
+        const userId = req.body.userId;
 
-        const [taksIdChecker] = await connection.raw(`
-        SELECT *
-        FROM Tasks
+        const [taskIdChecker] = await connection.raw(`
+        SELECT * FROM Tasks
         WHERE id = ${taskId};
         `);
 
-        if (!taksIdChecker[0]) {
+        if (!taskIdChecker[0]) {
             errorCode = 404;
             throw new Error("Erro: Id da tarefa não encontrado no sistema.");
         }
@@ -30,7 +29,7 @@ export const addResponsibleUsers = async (req: Request, res: Response) => {
         }
 
         await connection.raw(`
-        INSERT INTO Responsibles (taskId, userId)
+        INSERT INTO Responsibles
         VALUES (${taskId}, ${userId});
         `);
 

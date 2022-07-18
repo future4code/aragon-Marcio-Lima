@@ -4,8 +4,8 @@ import connection from "../database/connection";
 export const updateNickname = async (req: Request, res: Response) => {
     let errorCode = 400;
     try {
-        const userId = req.params.userId as string;
-        const nickname = req.body.nickname as string;
+        const userId = req.params.userId;
+        const nickname = req.body.nickname;
 
         const [idChecker] = await connection.raw(`
         SELECT * FROM Users

@@ -1,13 +1,13 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { ping } from "./endpoints/ping";
-import { getUsers } from "./endpoints/getUsers";
-import { getTasks } from "./endpoints/getTasks";
-import { getResponsibles } from "./endpoints/getResponsibles";
-import { addResponsibleUsers } from "./endpoints/addResponsibleUsers";
-import { updateTaskStatus } from "./endpoints/updateTaskStatus";
-import { updateNickname } from "./endpoints/updateNickname";
-import { deleteTask } from "./endpoints/deleteTask";
+import { getUsers } from "./endpoints/endpoint1";
+import { getTasks } from "./endpoints/endpoint2";
+import { getResponsibles } from "./endpoints/endpoint3";
+import { addResponsibleUsers } from "./endpoints/endpoint4";
+import { updateTaskStatus } from "./endpoints/endpoint6";
+import { updateNickname } from "./endpoints/endpoint5";
+import { deleteTask } from "./endpoints/endpoint7";
 
 const app = express();
 

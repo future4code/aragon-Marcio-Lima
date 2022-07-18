@@ -8,7 +8,7 @@
     "migrations": "tsc && node ./build/database/migrations.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Márcio Lima (Aragon)",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.12",
