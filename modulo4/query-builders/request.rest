@@ -1,0 +1,31 @@
+### Ping
+GET http://localhost:3003/ping
+
+### Create perfume
+POST http://localhost:3003/perfumes
+Content-Type: application/json
+
+{
+    "name": "Kaiak Urbe",
+    "brand": "Natura",
+    "price": 94.90,
+    "ml": 100
+}
+
+
+### Get perfumes (query params: q to search for name and brand simultaneously)
+GET http://localhost:3003/perfumes?q=kouros
+
+### Update perfume price
+PUT http://localhost:3003/perfumes/03
+Content-Type: application/json
+
+{
+    "price": 100
+}
+
+
+### Delete perfume by id
+DELETE http://localhost:3003/perfumes/02
+
+
