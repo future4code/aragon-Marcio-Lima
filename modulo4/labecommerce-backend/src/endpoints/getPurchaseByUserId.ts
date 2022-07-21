@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 
-export const getPurchaseByUserId = async (req: Request, res: Response) => {
+export const getUserPurchases = async (req: Request, res: Response) => {
     let errorCode = 400
     try {
         res.status(200).send({ message: "Pong!" })

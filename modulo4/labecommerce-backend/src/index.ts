@@ -2,12 +2,12 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import { ping } from "./endpoints/ping"
-import { createUser } from "./endpoints/createUser"
+import { registerUser } from "./endpoints/registerUser"
 import { getAllUsers } from "./endpoints/getAllUsers"
-import { createProduct } from "./endpoints/createProduct"
+import { registerProduct } from "./endpoints/registerProduct"
 import { getAllProducts } from "./endpoints/getAllProducts"
-import { registerPurchase } from "./endpoints/registerPurchase"
-import { getPurchaseByUserId } from "./endpoints/getPurchaseByUserId"
+import { productPurchaseRecord } from "./endpoints/productPurchaseRecord"
+import { getUserPurchases } from "./endpoints/getPurchaseByUserId"
 
 dotenv.config()
 const app = express()
@@ -19,23 +19,23 @@ app.listen(process.env.PORT || 3003, () => {
     console.log(`Servidor rodando na porta ${process.env.PORT || 3003}`)
 })
 
-// Endpoint de teste
+// Endpoint test
 app.get("/ping", ping)
 
-// Endpoint 1. Cadastro de usuário
-app.post("/users", createUser)
+// Endpoint 1. Register user
+app.post("/users", registerUser)
 
-// Endpoint 2. Busca todos usuários
+// Endpoint 2. Get all users
 app.get("/users", getAllUsers)
 
-// Endpoint 3. Cadastro de produto
-app.post("/products", createProduct)
+// Endpoint 3. Register product
+app.post("/products", registerProduct)
 
-// Endpoint 4. Busca todos os produtos
+// Endpoint 4. Get all products
 app.get("/products", getAllProducts)
 
-// Endpoint 5. Registro de compra de produto
-app.post("/purchases", registerPurchase)
+// Endpoint 5. Product purchase record
+app.post("/purchases", productPurchaseRecord)
 
-// Endpoint 6. Busca das compras de um usuário
-app.get("users/:user_id/pruchases", getPurchaseByUserId)
+// Endpoint 6. Get user's purchases
+app.get("users/:user_id/purchases", getUserPurchases)
