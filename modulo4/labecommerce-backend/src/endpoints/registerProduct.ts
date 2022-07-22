@@ -25,13 +25,6 @@ export const registerProduct = async (req: Request, res: Response) => {
         if (typeof price !== "number") {
             errorCode = 422
             throw new Error(
-                "Error: The following parameter 'price' must be a number."
-            )
-        }
-
-        if (price <= 0) {
-            errorCode = 422
-            throw new Error(
                 "Error: The following parameter 'price' must be a number greater than 0."
             )
         }

@@ -6,18 +6,23 @@ export const getAllUsers = async (req: Request, res: Response) => {
     let errorCode = 400
     try {
         const search = req.query.q
+        const sort = req.query.sort || "email"
+        const order = req.query.order || "asc"
 
         if (search) {
             const result = await connection(TABLE_USERS)
-                .select("*")
+                .select()
                 .where("email", "LIKE", `%${search}%`)
+                .orderBy(`${sort}`, `${order}`)
 
             return res.status(200).send({
                 users: result,
             })
         }
 
-        const result = await connection(TABLE_USERS).select("*")
+        const result = await connection(TABLE_USERS)
+            .select("*")
+            .orderBy(`${sort}`, `${order}`)
 
         res.status(200).send({
             users: result,

@@ -27,58 +27,59 @@ export const productPurchaseRecord = async (req: Request, res: Response) => {
             )
         }
 
-        if (typeof quantity !== "number") {
-            errorCode = 422
-            throw new Error(
-                "Error: The following parameter 'quantity' must be a number."
-            )
-        }
-
-        if (quantity <= 0) {
+        if (typeof quantity !== "number" || quantity <= 0) {
             errorCode = 422
             throw new Error(
                 "Error: The following parameter 'quantity' must be a number greater than 0."
             )
         }
 
-        const userChecker = await connection(TABLE_USERS)
+        const userIdChecker = await connection(TABLE_USERS)
             .select()
             .where("id", "=", `${user_id}`)
 
-        if (userChecker.length === 0) {
+        if (userIdChecker.length === 0) {
             errorCode = 404
-            throw new Error("Error: 'user_id' not found.")
+            throw new Error(
+                "Error: 'user_id' didn't match any results in our database."
+            )
         }
 
-        const productChecker = await connection(TABLE_PRODUCTS)
+        const productIdChecker = await connection(TABLE_PRODUCTS)
             .select()
             .where("id", "=", `${product_id}`)
 
-        if (productChecker[0]) {
-            const newPurchase: Purchase = {
-                id: Date.now().toString(),
-                user_id: user_id,
-                product_id: product_id,
-                quantity: quantity,
-                total_price: productChecker[0].price * quantity,
-            }
-
-            await connection(TABLE_PURCHASES).insert({
-                id: newPurchase.id,
-                user_id: newPurchase.user_id,
-                product_id: newPurchase.total_price,
-                quantity: newPurchase.quantity,
-                total_price: newPurchase.total_price,
-            })
-
-            res.status(200).send({
-                message: "Product purchase successfully recorded.",
-                purchase: newPurchase,
-            })
-        } else {
+        if (productIdChecker.length === 0) {
             errorCode = 404
-            throw new Error("Error: Purchase didn't match any results.")
+            throw new Error(
+                "Error: 'product_id' didn't match any results in our database."
+            )
         }
+
+        const productPrice: any = await connection(TABLE_PRODUCTS)
+            .select("price")
+            .where("id", "=", `${product_id}`)
+
+        const newPurchase: Purchase = {
+            id: Date.now().toString(),
+            user_id: user_id,
+            product_id: product_id,
+            quantity: quantity,
+            total_price: quantity * productPrice[0].price,
+        }
+
+        await connection(TABLE_PURCHASES).insert({
+            id: newPurchase.id,
+            user_id: newPurchase.user_id,
+            product_id: newPurchase.product_id,
+            quantity: newPurchase.quantity,
+            total_price: newPurchase.total_price,
+        })
+
+        return res.status(201).send({
+            message: "Product purchase successfully recorded.",
+            purchase: newPurchase,
+        })
     } catch (error) {
         res.status(errorCode).send({ message: error.message })
     }
