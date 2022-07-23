@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./build/index.js",
     "dev": "ts-node-dev ./src/index.ts",
+    "build": "tsc",
     "migrations": "tsc && node ./build/database/migrations.js"
   },
   "keywords": [],
