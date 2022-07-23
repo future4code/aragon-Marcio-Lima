@@ -36,4 +36,4 @@ Content-Type: application/json
 }
 
 ### Endpoint 6. Get user's purchases
-GET http://localhost:3003/users/:user_id/purchases
+GET http://localhost:3003/users/101/purchases

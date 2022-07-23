@@ -38,4 +38,4 @@ app.get("/products", getAllProducts)
 app.post("/purchases", productPurchaseRecord)
 
 // Endpoint 6. Get user's purchases
-app.get("users/:user_id/purchases", getUserPurchases)
+app.get("/users/:user_id/purchases", getUserPurchases)

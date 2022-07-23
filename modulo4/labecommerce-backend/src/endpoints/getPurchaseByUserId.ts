@@ -16,20 +16,20 @@ export const getUserPurchases = async (req: Request, res: Response) => {
             throw new Error("Error: User not found.")
         }
 
-        const result = await connection.raw(`
+        const [result] = await connection.raw(`
         SELECT
+        Labe_Purchases.id,
         Labe_Users.email,
         Labe_Products.name,
         Labe_Products.price,
         Labe_Purchases.quantity,
         Labe_Purchases.total_price
         FROM Labe_Purchases
-        JOIN Labe_users
-        ON Labe_Purchases.user_id = Labe_users.id
-        JOIN Labe_Products
-        ON Labe_Purchases.product_id = Labe_Products.id
-        WHERE Labe_Purchases.user_id = ${user_id};
+        JOIN Labe_Users ON Labe_Purchases.user_id = Labe_Users.id
+        JOIN Labe_Products ON Labe_Purchases.product_id = Labe_Products.id
+        WHERE Labe_Purchases.user_id = "${user_id}";
         `)
+
         res.status(200).send({
             result: result,
         })
