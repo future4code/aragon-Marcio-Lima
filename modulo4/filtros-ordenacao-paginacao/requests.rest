@@ -1,0 +1,27 @@
+### Ping
+GET http://localhost:3003/ping
+
+
+### Get all users (query params: q to search for name or id, sort to sort, order to order, limit to limit, page to set page)
+GET http://localhost:3003/users?sort=role&order=asc
+
+
+### Exercício 1. Search products by name and order by price
+GET http://localhost:3003/products?q=celular&sort&order=asc
+
+
+### Exercício 2. Refactoring
+GET http://localhost:3003/products?page=2
+
+
+### Exercício 3. Create product
+POST http://localhost:3003/products
+Content-Type: application/json
+
+{
+    "name": "Bola quadrada",
+    "price": 6.66
+}
+
+### Exercício 4. Delete product
+DELETE http://localhost:3003/products/product1
