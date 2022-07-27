@@ -1,3 +1,4 @@
+# Projeto LabECommerce Backend
 ## Instruções
 
 ### Instalando as dependências:
@@ -69,8 +70,22 @@ DB_NAME = nome-do-banco-de-dados
 -   Path:`/users/:user_id/purchases`
 -   Output: o histórico de compras de um usuário por seu id.
 
-### Documentação:
+## Documentação:
 
-Postman
+-   [Postman](https://documenter.getpostman.com/view/20789615/UzXKWeXJ)
+-   [Heroku](https://marcio-labecommerce-backend.herokuapp.com/users)
 
-### Link Heroku
+## Stack utilizada
+
+- NodeJS
+- TypeScript
+- SQL
+- Knex
+- Express
+- Cors
+
+## Programas utilizados
+
+- VSCode e extensão REST Client
+- Postman API Platform
+- Heroku: Cloud Application Platform
