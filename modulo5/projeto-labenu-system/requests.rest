@@ -1,0 +1,14 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Exercício 0
+GET http://localhost:3003/classrooms
+
+### Endpoint 1
+POST http://localhost:3003/classrooms
+Content-Type: application/json
+
+{
+    "name": "Molina",
+    "module": "4"
+}
