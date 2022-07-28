@@ -6,8 +6,9 @@ GET http://localhost:3003/classrooms
 
 ### Endpoint 1
 POST http://localhost:3003/classrooms
+Content-Type: application/json
 
 {
-    "name": "test name",
-    "module": "0"
+    "name": "Molina",
+    "module": "4"
 }

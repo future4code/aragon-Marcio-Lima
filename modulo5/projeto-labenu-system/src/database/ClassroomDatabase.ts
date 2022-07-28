@@ -21,4 +21,6 @@ export class ClassroomDatabase extends BaseDatabase {
             module: classroom.getModule(),
         })
     }
+
+    public async getActiveClass() {}
 }
