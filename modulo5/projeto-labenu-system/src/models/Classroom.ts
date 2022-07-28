@@ -1,17 +1,7 @@
-export enum MODULE {
-    NOT_STARTED = "0",
-    MODULE_1 = "1",
-    MODULE_2 = "2",
-    MODULE_3 = "3",
-    MODULE_4 = "4",
-    MODULE_5 = "5",
-    MODULE_6 = "6",
-}
-
-export interface IClassroom {
+export interface IClassroomDB {
     id: string
     name: string
-    module: MODULE
+    module: string
 }
 
 export class Classroom {
@@ -19,6 +9,38 @@ export class Classroom {
         private id: string,
         private name: string,
         private students: string[],
-        private module: MODULE
+        private module: number
     ) {}
+
+    public getId() {
+        return this.id
+    }
+
+    public getName() {
+        return this.name
+    }
+
+    public getStudents() {
+        return this.students
+    }
+
+    public getModule() {
+        return this.module
+    }
+
+    public setId(newId: string) {
+        this.id = newId
+    }
+
+    public setName(newName: string) {
+        this.name = newName
+    }
+
+    public setStudents(newStudents: string[]) {
+        this.students = [...newStudents]
+    }
+
+    public setModule(newModule: number) {
+        this.module = newModule
+    }
 }
