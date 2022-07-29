@@ -3,6 +3,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 import { PingController } from "./endpoints/PingController"
 import { ClassroomController } from "./endpoints/ClassroomController"
+import { StudentController } from "./endpoints/StudentController"
 
 dotenv.config()
 const app = express()
@@ -16,13 +17,18 @@ app.listen(process.env.PORT || 3003, () => {
 
 const pingController = new PingController()
 const classroomController = new ClassroomController()
-const createClassroom = new ClassroomController()
+const studentController = new StudentController()
 
-// Endpoint de teste
 app.get("/ping", pingController.ping)
 
-// Exercício 0
 app.get("/classrooms", classroomController.getAllClassrooms)
 
-// Endpoint 1. Create classroom
 app.post("/classrooms", classroomController.createClassroom)
+
+app.get("/classrooms/active", classroomController.getActiveClassrooms)
+
+app.put("classrooms/:id", classroomController.updateModule)
+
+app.post("/students", studentController.createStudent)
+
+app.get("/students", studentController.getStudentByName)

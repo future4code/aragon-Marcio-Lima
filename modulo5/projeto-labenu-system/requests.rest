@@ -9,6 +9,36 @@ POST http://localhost:3003/classrooms
 Content-Type: application/json
 
 {
-    "name": "Molina",
-    "module": "4"
+    "name": "Einsten",
+    "module": "1"
 }
+
+### Endpoint 2
+GET http://localhost:3003/classrooms/active
+
+### Endpoint 3
+PUT http://localhost:3003/classrooms/101
+Content-Type: application/json
+
+{
+    "module": "5"
+}
+
+
+### Endpoint 4
+POST http://localhost:3003/students
+Content-Type: application/json
+
+{
+    "name": "Betina",
+    "email": "betina2@gmail.com",
+    "birthdate": "2002/01/09",
+    "classroom_id": "101"
+}
+
+### Endpoint 5
+GET http://localhost:3003/students/Aline
+
+### Endpoint 6
+
+### Endpoint 7

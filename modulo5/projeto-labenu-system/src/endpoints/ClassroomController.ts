@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { ClassroomDatabase } from "../database/ClassroomDatabase"
-import { Classroom } from "../models/Classroom"
+import { Classroom, IClassroomDB } from "../models/Classroom"
 
 export class ClassroomController {
     public async getAllClassrooms(req: Request, res: Response) {
@@ -21,7 +21,7 @@ export class ClassroomController {
             const { name, module } = req.body
 
             if (!name || !module) {
-                throw new Error("Error: Invalid body.")
+                throw new Error("Error: Missing parameters.")
             }
 
             if (module === "7") {
@@ -46,15 +46,40 @@ export class ClassroomController {
         }
     }
 
-    public async getActiveClass(req: Request, res: Response) {
+    public async getActiveClassrooms(req: Request, res: Response) {
         let errorCode = 400
         try {
             const classroomDatabase = new ClassroomDatabase()
-            const result = await classroomDatabase.getActiveClass()
+            const list = await classroomDatabase.getAllClassrooms()
 
-            res.status(200).send({ classrooms: result })
+            const result = list.filter((item) => {
+                return item.module !== "0"
+            })
+
+            if (result.length === 0) {
+                errorCode = 404
+                throw new Error("Erro: There are no active classes.")
+            }
+
+            res.status(200).send({ activeClasses: result })
         } catch (error) {
             res.status(errorCode).send({ message: error.message })
+        }
+    }
+
+    public async updateModule(req: Request, res: Response) {
+        let errorCode = 400
+        try {
+            const classroomId = req.params.classroomId
+            const module = req.body.module
+
+            const classroomDatabase = new ClassroomDatabase()
+            await classroomDatabase.updateModule(classroomId, module)
+            res.status(200).send({
+                message: "Class module successfully changed",
+            })
+        } catch (error) {
+            res.status(errorCode)
         }
     }
 }
