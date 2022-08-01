@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { ClassroomDatabase } from "../database/ClassroomDatabase"
-import { Classroom, IClassroomDB } from "../models/Classroom"
+import { Classroom } from "../models/Classroom"
 
 export class ClassroomController {
     public async getAllClassrooms(req: Request, res: Response) {
@@ -24,7 +24,7 @@ export class ClassroomController {
                 throw new Error("Error: Missing parameters.")
             }
 
-            if (module === "7") {
+            if (module > 6) {
                 throw new Error(
                     "Error: You must to choose a number between 0 and 6"
                 )
@@ -67,19 +67,34 @@ export class ClassroomController {
         }
     }
 
-    public async updateModule(req: Request, res: Response) {
+    public async changeModuleClass(req: Request, res: Response) {
         let errorCode = 400
         try {
             const classroomId = req.params.classroomId
             const module = req.body.module
 
+            if (!classroomId || !module) {
+                errorCode = 400
+                throw new Error("Error: Missing parameters.")
+            }
+
+            if (typeof classroomId !== "string" || typeof module !== "string") {
+                errorCode = 400
+                throw new Error(
+                    "Error: Classroom id and module must be strings."
+                )
+            }
+
             const classroomDatabase = new ClassroomDatabase()
-            await classroomDatabase.updateModule(classroomId, module)
+            await classroomDatabase.changeModuleClass(classroomId, module)
+
             res.status(200).send({
-                message: "Class module successfully changed",
+                message: "Class module successfully changed!",
             })
         } catch (error) {
-            res.status(errorCode)
+            res.status(errorCode).send({
+                message: error.message,
+            })
         }
     }
 }

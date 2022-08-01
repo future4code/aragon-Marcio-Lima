@@ -4,41 +4,47 @@ GET http://localhost:3003/ping
 ### Exercício 0
 GET http://localhost:3003/classrooms
 
-### Endpoint 1
+### Endpoint 1. Create a new class in the system
 POST http://localhost:3003/classrooms
 Content-Type: application/json
 
 {
     "name": "Einsten",
-    "module": "1"
+    "module": "6"
 }
 
-### Endpoint 2
+### Endpoint 2. Search for active classes
 GET http://localhost:3003/classrooms/active
 
-### Endpoint 3
-PUT http://localhost:3003/classrooms/101
+### Endpoint 3. Change module class
+PUT http://localhost:3003/classrooms/102
 Content-Type: application/json
 
 {
-    "module": "5"
+    "module": "4"
 }
 
-
-### Endpoint 4
+### Endpoint 4. Create a new student in the system
 POST http://localhost:3003/students
 Content-Type: application/json
 
 {
     "name": "Betina",
-    "email": "betina2@gmail.com",
+    "email": "betina23@gmail.com",
     "birthdate": "2002/01/09",
     "classroom_id": "101"
 }
 
-### Endpoint 5
-GET http://localhost:3003/students/Aline
+### Endpoint 5. Search for a student by name
+GET http://localhost:3003/students?q=aline
 
-### Endpoint 6
+### Endpoint 6. Edit student class
+PUT http://localhost:3003/students/202
+Content-Type: application/json
 
-### Endpoint 7
+{
+    "classroom_id": "101"
+}
+
+### Endpoint 7. Displays all students belonging to their respective class
+GET http://localhost:3003/students/103

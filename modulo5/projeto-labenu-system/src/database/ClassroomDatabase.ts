@@ -30,9 +30,9 @@ export class ClassroomDatabase extends BaseDatabase {
         })
     }
 
-    public async updateModule(classroomId: string, module: string) {
+    public async changeModuleClass(classroomId: string, module: string) {
         await BaseDatabase.connection(ClassroomDatabase.TABLE_CLASSROOMS)
-            .where(classroomId)
-            .update(module)
+            .where({ classroom_id: classroomId })
+            .update({ module: module })
     }
 }

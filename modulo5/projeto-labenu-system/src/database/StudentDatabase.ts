@@ -16,6 +16,16 @@ export class StudentDatabase extends BaseDatabase {
         })
     }
 
+    public async getStudentByName(search: string) {
+        const result = await BaseDatabase.connection(
+            StudentDatabase.TABLE_STUDENTS
+        )
+            .select()
+            .where("name", "LIKE", `${search}`)
+
+        return result
+    }
+
     public async getAllStudents() {
         const result = await BaseDatabase.connection(
             StudentDatabase.TABLE_STUDENTS
@@ -24,12 +34,18 @@ export class StudentDatabase extends BaseDatabase {
         return result
     }
 
-    public async getStudentByName(search: string) {
+    public async editStudentClass(classroomId: string, studentId: string) {
+        await BaseDatabase.connection(StudentDatabase.TABLE_STUDENTS)
+            .update({ classroom_id: classroomId })
+            .where({ id: studentId })
+    }
+
+    public async getStudentsByClass(classroomId: string) {
         const result = await BaseDatabase.connection(
             StudentDatabase.TABLE_STUDENTS
         )
             .select()
-            .where("name", "LIKE", `${search}`)
+            .where("classroom_id", "=", `${classroomId}`)
 
         return result
     }

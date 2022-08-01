@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 
 app.listen(process.env.PORT || 3003, () => {
-    console.log(`Servidor rodando na porta ${process.env.PORT || 3003}`)
+    console.log(`Server running on port ${process.env.PORT || 3003}`)
 })
 
 const pingController = new PingController()
@@ -20,15 +20,11 @@ const classroomController = new ClassroomController()
 const studentController = new StudentController()
 
 app.get("/ping", pingController.ping)
-
 app.get("/classrooms", classroomController.getAllClassrooms)
-
 app.post("/classrooms", classroomController.createClassroom)
-
 app.get("/classrooms/active", classroomController.getActiveClassrooms)
-
-app.put("classrooms/:id", classroomController.updateModule)
-
+app.put("classrooms/:classroomId", classroomController.changeModuleClass)
 app.post("/students", studentController.createStudent)
-
 app.get("/students", studentController.getStudentByName)
+app.put("/students/:id", studentController.editStudentClass)
+app.get("/students/:classroomId", studentController.getStudentsByClass)
