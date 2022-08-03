@@ -1,0 +1,35 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "nickname": "Mark",
+    "email": "marcio@email.com",
+    "password": "abc123"
+}
+
+### Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "marcio@email.com",
+    "password": "abc123"
+}
+
+### Create new recipe
+POST http://localhost:3003/recipes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
+Content-Type: application/json
+
+{
+    "title": "Lasanha",
+    "description": "Receita tradicional de lasanha"
+}
+
+### Get all recipes
+GET http://localhost:3003/recipes/?search=lasanha
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
