@@ -1,8 +1,8 @@
-import { Request, Response } from "express"
+import { Request, response, Response } from "express"
 import { RecipeDatabase } from "../database/RecipeDatabase"
 import { Recipe } from "../model/Recipe"
+import { USER_ROLES } from "../model/User"
 import { Authenticator } from "../service/Authenticator"
-import { HashManager } from "../service/HashManager"
 import { IdGenerator } from "../service/IdGenerator"
 
 export class RecipeController {
@@ -10,10 +10,10 @@ export class RecipeController {
         let errorCode = 400
         try {
             const token = req.headers.authorization
-            const search = req.query.search
-            const sort = req.query.sort || "updated_at"
-            const order = req.query.order || "asc"
-            const limit = Number(req.query.limit) || 5
+            const search = req.query.search as string
+            const sort = (req.query.sort as string) || "updated_at"
+            const order = (req.query.order as string) || "asc"
+            const limit = Number(req.query.limit) || 10
             const page = Number(req.query.page) || 1
             const offset = limit * (page - 1)
 
@@ -30,12 +30,18 @@ export class RecipeController {
                 throw new Error("Token inválido")
             }
 
-            if (typeof search !== "string") {
+            if (search && typeof search !== "string") {
                 throw new Error("Parâmetro 'search' deve ser uma string")
             }
 
             const recipeDatabase = new RecipeDatabase()
-            const recipesDB = await recipeDatabase.getAllRecipes(search)
+            const recipesDB = await recipeDatabase.getAllRecipes(
+                search,
+                sort,
+                order,
+                limit,
+                offset
+            )
 
             const recipes = recipesDB.map((recipeDB) => {
                 return new Recipe(
@@ -53,18 +59,7 @@ export class RecipeController {
             res.status(errorCode).send({ message: error.message })
         }
     }
-    /*
-## Endpoint 3) Cadastro de nova receita
 
-Desenvolva uma requisição que permite um usuário logado no sistema criar uma nova receita.
-A receita criada deve ser retornada ao final da operação
-
-Validações e Regras de Negócio do endpoint (baixa prioridade, implemente se der tempo):
-
-- token deve existir e representar um usuário válido.
-- title e description devem ser fornecidos e serem do tipo string.
-- title deve possuir ao menos 3 caracteres, enquanto description ao menos 10 caracteres.
-*/
     public createRecipe = async (req: Request, res: Response) => {
         let errorCode = 400
         try {
@@ -80,9 +75,28 @@ Validações e Regras de Negócio do endpoint (baixa prioridade, implemente se d
             const authenticator = new Authenticator()
             const payload = authenticator.getTokenPayload(token)
 
-            if (!payload) {
-                errorCode = 401
-                throw new Error("Token inválido")
+            if (!title && !description) {
+                throw new Error("Parâmetro faltando")
+            }
+
+            if (title && typeof title !== "string") {
+                throw new Error("Parâmetro 'title' deve ser uma string")
+            }
+
+            if (description && typeof description !== "string") {
+                throw new Error("Parâmetro 'description' deve ser uma string")
+            }
+
+            if (title.length < 3) {
+                throw new Error(
+                    "O parâmetro 'title' deve possuir ao menos 3 caracteres"
+                )
+            }
+
+            if (description.length < 10) {
+                throw new Error(
+                    "O parâmetro 'description' deve possuir ao menos 10 caracteres"
+                )
             }
 
             const idGenerator = new IdGenerator()
@@ -103,6 +117,137 @@ Validações e Regras de Negócio do endpoint (baixa prioridade, implemente se d
             res.status(201).send({
                 message: "Receita criada com sucesso!",
                 recipe,
+            })
+        } catch (error) {
+            res.status(errorCode).send({ message: error.message })
+        }
+    }
+
+    public editRecipe = async (req: Request, res: Response) => {
+        let errorCode = 400
+        try {
+            const token = req.headers.authorization
+            const id = req.params.id
+            const title = req.body.title
+            const description = req.body.description
+
+            if (!token) {
+                errorCode = 422
+                throw new Error("Token faltando")
+            }
+
+            const authenticator = new Authenticator()
+            const payload = authenticator.getTokenPayload(token)
+
+            if (!payload) {
+                errorCode = 401
+                throw new Error("Token faltando ou inválido")
+            }
+
+            if (!title && !description) {
+                throw new Error("Parâmetro faltando")
+            }
+
+            if (title && typeof title !== "string") {
+                throw new Error("Parâmetro 'title' deve ser uma string")
+            }
+
+            if (description && typeof description !== "string") {
+                throw new Error("Parâmetro 'description' deve ser uma string")
+            }
+
+            if (title.length < 3) {
+                throw new Error(
+                    "O parâmetro 'title' deve possuir ao menos 3 caracteres"
+                )
+            }
+
+            if (description.length < 10) {
+                throw new Error(
+                    "O parâmetro 'description' deve possuir ao menos 10 caracteres"
+                )
+            }
+
+            const recipeDatabase = new RecipeDatabase()
+            const recipeFromDB = await recipeDatabase.findRecipeById(id)
+
+            if (!recipeFromDB) {
+                errorCode = 401
+                throw new Error("O id da receita é inválido ou inexsistente")
+            }
+
+            if (payload.role === USER_ROLES.NORMAL) {
+                if (payload.id !== recipeFromDB.creator_id) {
+                    errorCode = 403
+                    throw new Error(
+                        "Somente admins tem permissão de editar receitas de outros usuários"
+                    )
+                }
+            }
+
+            const recipe = new Recipe(
+                recipeFromDB.id,
+                recipeFromDB.title,
+                recipeFromDB.description,
+                recipeFromDB.created_at,
+                recipeFromDB.updated_at,
+                recipeFromDB.creator_id
+            )
+
+            title && recipe.setTitle(title)
+            description && recipe.setDescription(description)
+
+            await recipeDatabase.editRecipe(recipe)
+
+            return res.status(200).send({
+                message: "Edição realizada com sucesso",
+                recipe,
+            })
+        } catch (error) {
+            res.status(errorCode).send({ message: error.message })
+        }
+    }
+
+    public deleteRecipe = async (req: Request, res: Response) => {
+        let errorCode = 400
+        try {
+            const token = req.headers.authorization
+            const id = req.params.id
+
+            if (!token) {
+                errorCode = 422
+                throw new Error("Token faltando")
+            }
+
+            const authenticator = new Authenticator()
+            const payload = authenticator.getTokenPayload(token)
+
+            if (!payload) {
+                errorCode = 401
+                throw new Error("Token faltando ou inválido")
+            }
+
+            const recipeDatabase = new RecipeDatabase()
+            const recipeFromDB = await recipeDatabase.findRecipeById(id)
+
+            if (!recipeFromDB) {
+                errorCode = 401
+                throw new Error("O id da receita é inválido ou inexsistente")
+            }
+
+            if (payload.role === USER_ROLES.NORMAL) {
+                if (payload.id !== recipeFromDB.creator_id) {
+                    errorCode = 403
+                    throw new Error(
+                        "Somente admins tem permissão de editar receitas de outros usuários"
+                    )
+                }
+            }
+
+            await recipeDatabase.deleteRecipe(id)
+
+            return res.status(200).send({
+                message: "Receita deletada com sucesso!",
             })
         } catch (error) {
             res.status(errorCode).send({ message: error.message })

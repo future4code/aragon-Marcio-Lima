@@ -26,10 +26,24 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTIt
 Content-Type: application/json
 
 {
-    "title": "Lasanha",
-    "description": "Receita tradicional de lasanha"
+    "title": "Frango ao molho de tangerina",
+    "description": "Receita tailandesa de frango ao molho de tangerina da série 'The Big Bang Theory'."
 }
 
 ### Get all recipes
-GET http://localhost:3003/recipes/?search=lasanha
+GET http://localhost:3003/recipes/?sort=title
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
+
+### Edit recipe by id
+PUT http://localhost:3003/recipes/5567d209-d4bb-426d-8fe9-5f2fb8ddca0b
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
+Content-Type: application/json
+
+{
+    "title": "lasanha vegetariana",
+    "description": "lasanha vegetariana saborosa somente com insumos orgânicos"
+}
+
+### Delete recipe by id
+DELETE http://localhost:3003/recipes/434baa17-00d6-48ad-9a30-848066a664e9
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
