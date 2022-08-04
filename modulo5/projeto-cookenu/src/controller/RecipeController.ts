@@ -1,4 +1,4 @@
-import { Request, response, Response } from "express"
+import { Request, Response } from "express"
 import { RecipeDatabase } from "../database/RecipeDatabase"
 import { Recipe } from "../model/Recipe"
 import { USER_ROLES } from "../model/User"
@@ -10,7 +10,7 @@ export class RecipeController {
         let errorCode = 400
         try {
             const token = req.headers.authorization
-            const search = req.query.search as string
+            const search = req.query.q as string
             const sort = (req.query.sort as string) || "updated_at"
             const order = (req.query.order as string) || "asc"
             const limit = Number(req.query.limit) || 10

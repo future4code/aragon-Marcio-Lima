@@ -1,7 +1,7 @@
 ### Endpoint de teste
 GET http://localhost:3003/ping
 
-### Signup
+### Endpoint 1. Signup
 POST http://localhost:3003/users/signup
 Content-Type: application/json
 
@@ -11,7 +11,7 @@ Content-Type: application/json
     "password": "abc123"
 }
 
-### Login
+### Endpoint 2. Login
 POST http://localhost:3003/users/login
 Content-Type: application/json
 
@@ -20,9 +20,9 @@ Content-Type: application/json
     "password": "abc123"
 }
 
-### Create new recipe
+### Endpoint 3. Create new recipe
 POST http://localhost:3003/recipes
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
 Content-Type: application/json
 
 {
@@ -30,13 +30,9 @@ Content-Type: application/json
     "description": "Receita tailandesa de frango ao molho de tangerina da série 'The Big Bang Theory'."
 }
 
-### Get all recipes
-GET http://localhost:3003/recipes/?sort=title
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
-
-### Edit recipe by id
+### Endpoint 4. Edit recipe by id
 PUT http://localhost:3003/recipes/5567d209-d4bb-426d-8fe9-5f2fb8ddca0b
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
 Content-Type: application/json
 
 {
@@ -44,6 +40,18 @@ Content-Type: application/json
     "description": "lasanha vegetariana saborosa somente com insumos orgânicos"
 }
 
-### Delete recipe by id
-DELETE http://localhost:3003/recipes/434baa17-00d6-48ad-9a30-848066a664e9
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk1NTY1MDYsImV4cCI6MTY1OTcyOTMwNn0.64Cqqd-D8AX-jFDY40WMiTBuVIsWC4wGa4oXemYnNEk
+### Endpoint 5. Delete recipe
+DELETE http://localhost:3003/recipes/e7169d1d-e59b-40ef-b8f9-a52e1f7082b4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+
+### Endpoint 6. Get all recipes
+GET http://localhost:3003/recipes/?q=sushi
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+
+### Endpoint Get all users
+GET http://localhost:3003/users/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+
+### Endpoint 7. Delete user
+DELETE http://localhost:3003/users/249d0ab3-2852-4245-beb3-2bd2d4919929
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU

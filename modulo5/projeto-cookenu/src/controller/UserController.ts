@@ -151,4 +151,85 @@ export class UserController {
             res.status(errorCode).send({ message: error.message })
         }
     }
+
+    public getAllUsers = async (req: Request, res: Response) => {
+        let errorCode = 400
+        try {
+            const token = req.headers.authorization
+            const search = req.query.q as string
+
+            if (!token) {
+                errorCode = 401
+                throw new Error("Token faltando")
+            }
+
+            const authenticator = new Authenticator()
+            const payload = authenticator.getTokenPayload(token)
+
+            if (!payload) {
+                errorCode = 401
+                throw new Error("Token inválido")
+            }
+
+            if (search && typeof search !== "string") {
+                throw new Error("Parâmetro 'search' deve ser uma string")
+            }
+
+            const userDatabase = new UserDatabase()
+            const usersDB = await userDatabase.getAllUsers(search)
+
+            const users = usersDB.map((userDB) => {
+                return new User(
+                    userDB.id,
+                    userDB.nickname,
+                    userDB.email,
+                    userDB.password,
+                    userDB.role
+                )
+            })
+
+            res.status(200).send({ users })
+        } catch (error) {
+            res.status(errorCode).send({ message: error.message })
+        }
+    }
+
+    public deleteUser = async (req: Request, res: Response) => {
+        let errorCode = 400
+        try {
+            const token = req.headers.authorization
+            const id = req.params.id
+
+            const authenticator = new Authenticator()
+            const payload = authenticator.getTokenPayload(token)
+
+            if (!payload) {
+                errorCode = 401
+                throw new Error("Token inválido")
+            }
+
+            if (payload.role !== USER_ROLES.ADMIN) {
+                errorCode = 403
+                throw new Error("Somente admins podem deletar um usuário")
+            }
+
+            const userDatabase = new UserDatabase()
+            const isUserExists = await userDatabase.checkIfExistsById(id)
+
+            if (!isUserExists) {
+                errorCode = 401
+                throw new Error("Token inválido")
+            }
+
+            if (id === payload.id) {
+                throw new Error("Não é possível deletar a si mesmo")
+            }
+
+            await userDatabase.deleteUser(id)
+
+            res.status(200).send({ message: "Usuário deletado com sucesso!" })
+        } catch (error) {
+            res.status(errorCode).send({ message: error.message })
+        }
+    }
 }
