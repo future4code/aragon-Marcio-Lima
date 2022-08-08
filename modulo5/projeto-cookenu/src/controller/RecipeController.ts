@@ -4,8 +4,10 @@ import { Recipe } from "../model/Recipe"
 import { USER_ROLES } from "../model/User"
 import { Authenticator } from "../service/Authenticator"
 import { IdGenerator } from "../service/IdGenerator"
+import { DateFormat } from "../util/DateFormat"
 
 export class RecipeController {
+    private static currentDate = new DateFormat()
     public getAllRecipes = async (req: Request, res: Response) => {
         let errorCode = 400
         try {
@@ -106,8 +108,8 @@ export class RecipeController {
                 id,
                 title,
                 description,
-                new Date(),
-                new Date(),
+                new Date(RecipeController.currentDate.date),
+                new Date(RecipeController.currentDate.date),
                 payload.id
             )
 
@@ -190,7 +192,9 @@ export class RecipeController {
                 recipeFromDB.title,
                 recipeFromDB.description,
                 recipeFromDB.created_at,
-                recipeFromDB.updated_at,
+                (recipeFromDB.updated_at = new Date(
+                    RecipeController.currentDate.date
+                )),
                 recipeFromDB.creator_id
             )
 

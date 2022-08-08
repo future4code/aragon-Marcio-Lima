@@ -4,6 +4,7 @@ import { User, USER_ROLES } from "../model/User"
 import { Authenticator, ITokenPayload } from "../service/Authenticator"
 import { HashManager } from "../service/HashManager"
 import { IdGenerator } from "../service/IdGenerator"
+import { validateEmail } from "../util/validateEmail"
 
 export class UserController {
     public signup = async (req: Request, res: Response) => {
@@ -41,7 +42,7 @@ export class UserController {
                 )
             }
 
-            if (!email.includes("@") || !email.includes(".com")) {
+            if (!validateEmail) {
                 throw new Error("O email deve ter um formato válido")
             }
 
@@ -104,7 +105,7 @@ export class UserController {
                 )
             }
 
-            if (!email.includes("@") || !email.includes(".com")) {
+            if (!validateEmail) {
                 throw new Error("O email deve ter um formato válido")
             }
 
@@ -205,7 +206,7 @@ export class UserController {
 
             if (!payload) {
                 errorCode = 401
-                throw new Error("Token inválido")
+                throw new Error("Token ausente")
             }
 
             if (payload.role !== USER_ROLES.ADMIN) {
@@ -218,7 +219,7 @@ export class UserController {
 
             if (!isUserExists) {
                 errorCode = 401
-                throw new Error("Token inválido")
+                throw new Error("Id não encontrado")
             }
 
             if (id === payload.id) {

@@ -20,38 +20,38 @@ Content-Type: application/json
     "password": "abc123"
 }
 
-### Endpoint 3. Create new recipe
+### Endpoint 3. Create new recipe (protected)
 POST http://localhost:3003/recipes
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk5MDg4OTcsImV4cCI6MTY2MDA4MTY5N30.GFmvMIs7I7FTtwE4mE16y72aHhvEc8224VUcYh40EV4
 Content-Type: application/json
 
 {
-    "title": "Frango ao molho de tangerina",
-    "description": "Receita tailandesa de frango ao molho de tangerina da série 'The Big Bang Theory'."
+    "title": "Bolo de cenoura",
+    "description": "Bolo de cenoura com deliciosa calda de chocalate. Receita ideal para acompanhar um café no fim de tarde."
 }
 
-### Endpoint 4. Edit recipe by id
+### Endpoint 4. Edit recipe (protected)
 PUT http://localhost:3003/recipes/5567d209-d4bb-426d-8fe9-5f2fb8ddca0b
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk5MDg4OTcsImV4cCI6MTY2MDA4MTY5N30.GFmvMIs7I7FTtwE4mE16y72aHhvEc8224VUcYh40EV4
 Content-Type: application/json
 
 {
-    "title": "lasanha vegetariana",
-    "description": "lasanha vegetariana saborosa somente com insumos orgânicos"
+    "title": "Lasanha Vegetariana",
+    "description": "Lasanha vegetariana saborosa. Preparada exclusivamente com insumos orgânicos."
 }
 
-### Endpoint 5. Delete recipe
-DELETE http://localhost:3003/recipes/e7169d1d-e59b-40ef-b8f9-a52e1f7082b4
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+### Endpoint 5. Delete recipe (protected)
+DELETE http://localhost:3003/recipes/cb05da0b-2287-4cf6-beef-5b3e46b9e3f5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk5MDg4OTcsImV4cCI6MTY2MDA4MTY5N30.GFmvMIs7I7FTtwE4mE16y72aHhvEc8224VUcYh40EV4
 
-### Endpoint 6. Get all recipes
-GET http://localhost:3003/recipes/?q=sushi
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+### Endpoint 6. Get all recipes (protected)
+GET http://localhost:3003/recipes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk5MDg4OTcsImV4cCI6MTY2MDA4MTY5N30.GFmvMIs7I7FTtwE4mE16y72aHhvEc8224VUcYh40EV4
 
-### Endpoint Get all users
+### Endpoint Get all users (protected)
 GET http://localhost:3003/users/
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk5MDg4OTcsImV4cCI6MTY2MDA4MTY5N30.GFmvMIs7I7FTtwE4mE16y72aHhvEc8224VUcYh40EV4
 
-### Endpoint 7. Delete user
+### Endpoint 7. Delete user (protected)
 DELETE http://localhost:3003/users/249d0ab3-2852-4245-beb3-2bd2d4919929
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk2NDM2NDQsImV4cCI6MTY1OTgxNjQ0NH0.MJrigiY0YTuCbwc2D1Z3_qyubGqIzrWNxASTmmsDMhU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0OWQwYWIzLTI4NTItNDI0NS1iZWIzLTJiZDJkNDkxOTkyOSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk5MDg4OTcsImV4cCI6MTY2MDA4MTY5N30.GFmvMIs7I7FTtwE4mE16y72aHhvEc8224VUcYh40EV4

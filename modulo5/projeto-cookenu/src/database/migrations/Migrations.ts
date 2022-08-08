@@ -50,13 +50,11 @@ class Migrations extends BaseDatabase {
     }
 
     insertData = async () => {
-        await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
-            .insert(users)
+        await BaseDatabase.connection(UserDatabase.TABLE_USERS).insert(users)
 
-        await BaseDatabase
-            .connection(RecipeDatabase.TABLE_RECIPES)
-            .insert(recipes)
+        await BaseDatabase.connection(RecipeDatabase.TABLE_RECIPES).insert(
+            recipes
+        )
     }
 }
 
