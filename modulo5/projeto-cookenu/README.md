@@ -121,8 +121,8 @@ BCRYPT_SALT_ROUNDS = 12
 
 ### Documentação (links):
 
-[Heroku](https://cookenu-backend-marcio-aragon.herokuapp.com/ping)
-[Postman](https://documenter.getpostman.com/view/20789615/VUjMoRQj)
+- [Heroku](https://cookenu-backend-marcio-aragon.herokuapp.com/ping)
+- [Postman](https://documenter.getpostman.com/view/20789615/VUjMoRQj)
 
 ---
 
