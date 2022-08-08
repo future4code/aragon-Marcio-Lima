@@ -1,0 +1,29 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### 1) Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Marcio",
+    "email": "marcio1@gmail.com",
+    "password": "abc123"
+}
+
+### 2) Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "marcio@gmail.com",
+    "password": "abc123"
+}
+
+### 3) Get all users
+GET http://localhost:3003/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5Y2I3NGMwLTYwZDgtNDhhYy1iY2RjLWRmOTkyNzIzNDdkZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk5ODYwNzQsImV4cCI6MTY2MDE1ODg3NH0.XSAABDIwAUGbmX-V5nxfNDMZgRa2LFjSLAlNlNySoK0
+
+### 4) Delete user
+DELETE http://localhost:3003/users/7079b8e4-95cd-48aa-82a9-77454e94b789
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5Y2I3NGMwLTYwZDgtNDhhYy1iY2RjLWRmOTkyNzIzNDdkZiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk5ODYwNzQsImV4cCI6MTY2MDE1ODg3NH0.XSAABDIwAUGbmX-V5nxfNDMZgRa2LFjSLAlNlNySoK0
