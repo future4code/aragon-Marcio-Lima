@@ -154,5 +154,5 @@ BCRYPT_SALT_ROUNDS = 12
 
 ### Autor
 
-[**Márcio Lima**](https://github.com/MarcioLima79) - desenvolvedor em treinamento pela [Labenu](https://www.labenu.com.br/)
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/marcio-lima79)
+- [**Márcio Lima**](https://github.com/MarcioLima79) - desenvolvedor em treinamento pela [Labenu](https://www.labenu.com.br/)
+- [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/marcio-lima79)
