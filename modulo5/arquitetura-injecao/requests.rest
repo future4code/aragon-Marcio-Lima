@@ -1,0 +1,40 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### 1) Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Marcio",
+    "email": "marcio1@gmail.com",
+    "password": "abc123"
+}
+
+### 2) Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "marcio1@gmail.com",
+    "password": "abc123"
+}
+
+### 3) Get users
+GET http://localhost:3003/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZGFiYjAzLTFhY2UtNGE2ZC04YTI1LWY4Nzg4MDVmMjdmNiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAxNTYxMzYsImV4cCI6MTY2MDMyODkzNn0.i6Q7F_5BDfoh0Chi2XWnUSmAjLmA-tOqjeKt0WEMeII
+
+### 4) Delete user
+DELETE http://localhost:3003/users/32dabb03-1ace-4a6d-8a25-f878805f27f6
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZGFiYjAzLTFhY2UtNGE2ZC04YTI1LWY4Nzg4MDVmMjdmNiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAxNTYxMzYsImV4cCI6MTY2MDMyODkzNn0.i6Q7F_5BDfoh0Chi2XWnUSmAjLmA-tOqjeKt0WEMeII
+
+### 5) Edit user
+PUT http://localhost:3003/users/32dabb03-1ace-4a6d-8a25-f878805f27f6
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZGFiYjAzLTFhY2UtNGE2ZC04YTI1LWY4Nzg4MDVmMjdmNiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAxNTYxMzYsImV4cCI6MTY2MDMyODkzNn0.i6Q7F_5BDfoh0Chi2XWnUSmAjLmA-tOqjeKt0WEMeII
+Content-Type: application/json
+
+{
+    "name": "Márcio",
+    "email": "marcio1@gmail.com",
+    "password": "abd123"
+}
