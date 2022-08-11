@@ -1,0 +1,29 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Endpoint 1. Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Marcio",
+    "email": "marcio@email.com",
+    "password": "abc123"
+}
+
+### Endpoint 2. Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "fulano@gmail.com",
+    "password": "qwerty00"
+}
+
+### Endpoint 3. Create post 
+POST http://localhost:3003/posts/102
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAyNDUyNzQsImV4cCI6MTY2MDQxODA3NH0.ppOuttfnDq9xBvehTRzsQN-c36dtkK6MrViuJIV9Y40
+
+{
+    "content": "Testing"
+}
