@@ -89,3 +89,8 @@ export interface ILikeInputDTO {
     postId: string
     userId: string
 }
+
+export interface IDeletePostInputDTO {
+    token: string
+    idToDelete: string
+}

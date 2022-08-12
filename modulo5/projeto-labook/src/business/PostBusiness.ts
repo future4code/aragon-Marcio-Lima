@@ -1,12 +1,14 @@
 import { PostDatabase } from "../database/PostDatabase"
 import {
     ICreatePostInputDTO,
+    IDeletePostInputDTO,
     IGetPostsDBDTO,
     IGetPostsInputDTO,
     IGetPostsOutputDTO,
     IGetPostsPost,
     Post,
 } from "../models/Post"
+import { USER_ROLES } from "../models/User"
 import { Authenticator } from "../services/Authenticator"
 import { IdGenerator } from "../services/IdGenerator"
 
@@ -94,6 +96,39 @@ export class PostBusiness {
 
         const response: IGetPostsOutputDTO = {
             posts,
+        }
+
+        return response
+    }
+
+    public deletePost = async (input: IDeletePostInputDTO) => {
+        const token = input.token
+        const idToDelete = input.idToDelete
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if (!payload) {
+            throw new Error("Token inválido ou faltando")
+        }
+
+        const findPost = await this.postDatabase.findPostById(idToDelete)
+
+        if (!findPost) {
+            throw new Error("Post não encontrado")
+        }
+
+        if (payload.role === USER_ROLES.NORMAL) {
+            if (payload.id !== findPost.user_id) {
+                throw new Error(
+                    "Somente admins podem deletar de outros usuários"
+                )
+            }
+        }
+
+        await this.postDatabase.deletePost(idToDelete)
+
+        const response = {
+            message: "Post deletado com sucesso",
         }
 
         return response

@@ -22,13 +22,17 @@ Content-Type: application/json
 
 ### Endpoint 3. Create post 
 POST http://localhost:3003/posts
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAyNjM5MTQsImV4cCI6MTY2MDQzNjcxNH0.5nBra8bJfuWkeQDmnK41A-AkeqI15601vupvG5mWgus
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
 Content-Type: application/json
 
 {
-    "content": "Tenha isso em mente: quer seja um grão de areia ou pedra, na água ambos afundam igualmente. (Oh Dae-su, Oldboy)"
+    "content": "Houston, we have a problem"
 }
 
 ### Endpoint 4. Get all posts
 GET http://localhost:3003/posts
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAyNjM5MTQsImV4cCI6MTY2MDQzNjcxNH0.5nBra8bJfuWkeQDmnK41A-AkeqI15601vupvG5mWgus
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
+
+### Endpoint 5. Delete post
+DELETE http://localhost:3003/posts/d146523b-0633-44dc-8e10-9a8b4006d29d
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w

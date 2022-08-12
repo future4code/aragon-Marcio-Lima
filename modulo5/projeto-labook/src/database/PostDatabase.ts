@@ -35,4 +35,20 @@ export class PostDatabase extends BaseDatabase {
 
         return result
     }
+
+    public findPostById = async (id: string) => {
+        const result: IPostDB[] = await BaseDatabase.connection(
+            PostDatabase.TABLE_POSTS
+        )
+            .select()
+            .where({ id })
+
+        return result[0]
+    }
+
+    public deletePost = async (id: string) => {
+        await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
+            .select()
+            .where({ id })
+    }
 }
