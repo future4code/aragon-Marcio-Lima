@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "name": "Marcio",
-    "email": "marcio@email.com",
+    "email": "marcio1@email.com",
     "password": "abc123"
 }
 
@@ -16,14 +16,19 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "fulano@gmail.com",
-    "password": "qwerty00"
+    "email": "marcio1@email.com",
+    "password": "abc123"
 }
 
 ### Endpoint 3. Create post 
-POST http://localhost:3003/posts/102
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMiIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAyNDUyNzQsImV4cCI6MTY2MDQxODA3NH0.ppOuttfnDq9xBvehTRzsQN-c36dtkK6MrViuJIV9Y40
+POST http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAyNjM5MTQsImV4cCI6MTY2MDQzNjcxNH0.5nBra8bJfuWkeQDmnK41A-AkeqI15601vupvG5mWgus
+Content-Type: application/json
 
 {
-    "content": "Testing"
+    "content": "Tenha isso em mente: quer seja um grão de areia ou pedra, na água ambos afundam igualmente. (Oh Dae-su, Oldboy)"
 }
+
+### Endpoint 4. Get all posts
+GET http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAyNjM5MTQsImV4cCI6MTY2MDQzNjcxNH0.5nBra8bJfuWkeQDmnK41A-AkeqI15601vupvG5mWgus

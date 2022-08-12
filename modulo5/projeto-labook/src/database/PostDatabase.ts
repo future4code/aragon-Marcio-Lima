@@ -1,4 +1,4 @@
-import { IPostDB, Post } from "../models/Post"
+import { IGetPostsDBDTO, IPostDB, Post } from "../models/Post"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class PostDatabase extends BaseDatabase {
@@ -15,5 +15,24 @@ export class PostDatabase extends BaseDatabase {
         await BaseDatabase.connection(PostDatabase.TABLE_POSTS).insert(
             postDB
         )
+    }
+
+    public getPosts = async (input: IGetPostsDBDTO) => {
+        const search = input.search
+        const order = input.order
+        const sort = input.sort
+        const limit = input.limit
+        const offset = input.offset
+
+        const result: IPostDB[] = await BaseDatabase.connection(
+            PostDatabase.TABLE_POSTS
+        )
+            .select()
+            .where("content", "LIKE", `%${search}%`)
+            .orderBy(order, sort)
+            .limit(limit)
+            .offset(offset)
+
+        return result
     }
 }
