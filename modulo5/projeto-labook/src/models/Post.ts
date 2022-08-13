@@ -84,10 +84,14 @@ export interface IGetPostsOutputDTO {
     posts: IGetPostsPost[]
 }
 
-export interface ILikeInputDTO {
+export interface ILikePostInputDTO {
     token: string
     postId: string
-    userId: string
+}
+
+export interface IDislikePostInputDTO {
+    token: string
+    postId: string
 }
 
 export interface IDeletePostInputDTO {

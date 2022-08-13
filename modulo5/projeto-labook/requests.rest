@@ -1,4 +1,4 @@
-### Endpoint de teste
+### Endpoint 0. Ping (endpoint de teste)
 GET http://localhost:3003/ping
 
 ### Endpoint 1. Signup
@@ -30,9 +30,17 @@ Content-Type: application/json
 }
 
 ### Endpoint 4. Get all posts
-GET http://localhost:3003/posts
+GET http://localhost:3003/posts?search=hakuna
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
 
 ### Endpoint 5. Delete post
 DELETE http://localhost:3003/posts/d146523b-0633-44dc-8e10-9a8b4006d29d
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
+
+### Endpoint 6. Like post
+POST http://localhost:3003/posts/like/202
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
+
+### Endpoint 7. Dislke post
+DELETE http://localhost:3003/posts/dislike/d146523b-0633-44dc-8e10-9a8b4006d29d
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w

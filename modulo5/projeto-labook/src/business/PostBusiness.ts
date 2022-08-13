@@ -2,10 +2,13 @@ import { PostDatabase } from "../database/PostDatabase"
 import {
     ICreatePostInputDTO,
     IDeletePostInputDTO,
+    IDislikePostInputDTO,
     IGetPostsDBDTO,
     IGetPostsInputDTO,
     IGetPostsOutputDTO,
     IGetPostsPost,
+    ILikeDB,
+    ILikePostInputDTO,
     Post,
 } from "../models/Post"
 import { USER_ROLES } from "../models/User"
@@ -111,14 +114,16 @@ export class PostBusiness {
             throw new Error("Token inválido ou faltando")
         }
 
-        const findPost = await this.postDatabase.findPostById(idToDelete)
+        const isPostExists = await this.postDatabase.findPostById(
+            idToDelete
+        )
 
-        if (!findPost) {
+        if (!isPostExists) {
             throw new Error("Post não encontrado")
         }
 
         if (payload.role === USER_ROLES.NORMAL) {
-            if (payload.id !== findPost.user_id) {
+            if (payload.id !== isPostExists.user_id) {
                 throw new Error(
                     "Somente admins podem deletar de outros usuários"
                 )
@@ -129,6 +134,82 @@ export class PostBusiness {
 
         const response = {
             message: "Post deletado com sucesso",
+        }
+
+        return response
+    }
+
+    public likePost = async (input: ILikePostInputDTO) => {
+        const token = input.token
+        const id = input.postId
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if (!payload) {
+            throw new Error("Token inválido ou faltando")
+        }
+
+        const isPostExists = await this.postDatabase.findPostById(id)
+
+        if (!isPostExists) {
+            throw new Error("Post não encontrado")
+        }
+
+        const findLikedPost = await this.postDatabase.findLikedPost(
+            id,
+            payload.id
+        )
+
+        if (findLikedPost) {
+            throw new Error("Impossível curtir o mesmo post duas vezes")
+        }
+
+        const likeId = this.idGenerator.generate()
+
+        const newLike: ILikeDB = {
+            id: likeId,
+            post_id: id,
+            user_id: payload.id,
+        }
+
+        await this.postDatabase.likePost(newLike)
+
+        const response = {
+            message: "Post curtido!",
+        }
+
+        return response
+    }
+
+    public dislikePost = async (input: IDislikePostInputDTO) => {
+        const token = input.token
+        const id = input.postId
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if (!payload) {
+            throw new Error("Token inválido ou faltando")
+        }
+
+        const isPostExists = await this.postDatabase.findPostById(id)
+
+        if (!isPostExists) {
+            throw new Error("Post não encontrado")
+        }
+
+        const findLikedPost = await this.postDatabase.findLikedPost(
+            id,
+            payload.id
+        )
+
+        if (!findLikedPost) {
+            throw new Error("Curtir post")
+        }
+
+        await this.postDatabase.dislikePost(id)
+
+        const response = {
+            message: "Post descurtido :(",
         }
 
         return response
