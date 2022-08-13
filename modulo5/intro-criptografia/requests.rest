@@ -1,0 +1,40 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+
+### Signup
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+    "nickname": "marcio",
+    "email": "marcio12@email.com",
+    "password": "marcio123"
+}
+
+### Login
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+    "email": "marcio@email.com",
+    "password": "marcio123"
+}
+
+### Get all users (protected)
+GET http://localhost:3003/users?search=
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzN2VmYjVhLTA3YWUtNDRkNS1hMTJlLWQ4YjhjZjIwZmEyOCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk0NjY2MTgsImV4cCI6MTY1OTU1MzAxOH0.q3XmBv616WJovmLFmvBDUjE_dD4qvzgcEvO1Ly9UB2w
+
+### Edit user (protected)
+PUT http://localhost:3003/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzN2VmYjVhLTA3YWUtNDRkNS1hMTJlLWQ4YjhjZjIwZmEyOCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk0NjY2MTgsImV4cCI6MTY1OTU1MzAxOH0.q3XmBv616WJovmLFmvBDUjE_dD4qvzgcEvO1Ly9UB2w
+Content-Type: application/json
+
+{
+    "nickname": "marc1",
+}
+
+### Delete user (protected)
+DELETE http://localhost:3003/users/7079b8e4-95cd-48aa-82a9-77454e94b789
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzN2VmYjVhLTA3YWUtNDRkNS1hMTJlLWQ4YjhjZjIwZmEyOCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk0NjY2MTgsImV4cCI6MTY1OTU1MzAxOH0.q3XmBv616WJovmLFmvBDUjE_dD4qvzgcEvO1Ly9UB2w
+Content-Type: application/json
