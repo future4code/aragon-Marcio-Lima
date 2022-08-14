@@ -119,7 +119,7 @@ BCRYPT_SALT_ROUNDS = 12
 -   **Método** `POST`
 -   **Caminho** `/posts`
 -   **Entrada** `token de acesso, content`
--   **Saída:** `mensagem de receita criada com sucesso e a própria receita em si.`
+-   **Saída:** `mensagem de postagem criada com sucesso e a própria postagem em si.`
 -   **Validações e regras de negócio:**
     -   `content deve possuir no mínimo 1 caractere`
 
@@ -128,7 +128,7 @@ BCRYPT_SALT_ROUNDS = 12
 -   **Método:** `GET`
 -   **Caminho:** `/posts`
 -   **Entrada:** `token de acesso`
--   **Saída** `uma lista de todas as receitas cadastradas no sistema`
+-   **Saída** `uma lista com todos os posts`
 -   **Observação:** `é possível realizar uma busca por uma postagem específica através de alguma palavra existente no texto`
 -   **Validações e regras de negócio:**
     -   `dentre as informações dos posts, deve existir também o número de likes de cada um`
@@ -138,7 +138,7 @@ BCRYPT_SALT_ROUNDS = 12
 -   **Método:** `DELETE`
 -   **Caminho:** `/posts/:id`
 -   **Entrada:** `token de acesso, id da postagem a ser removida (via params)`
--   **Saída:** `mensagem de receita deletada com sucesso`
+-   **Saída:** `mensagem indicando que a postagem foi removida`
 -   **Validações e regras de negócio:**
     -   `id do post a ser deletado deve existir no sistema`
 
