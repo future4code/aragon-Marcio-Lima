@@ -64,9 +64,10 @@ export class PostController {
     public likePost = async (req: Request, res: Response) => {
         try {
             const input: ILikePostInputDTO = {
-                token: req.headers.authorization,
-                postId: req.params.id,
+                user_id: req.headers.authorization,
+                post_id: req.params.id,
             }
+
             const response = await this.postBusiness.likePost(input)
 
             res.status(200).send(response)
@@ -78,9 +79,10 @@ export class PostController {
     public dislikePost = async (req: Request, res: Response) => {
         try {
             const input: IDislikePostInputDTO = {
-                token: req.headers.authorization,
-                postId: req.params.id,
+                user_id: req.headers.authorization,
+                post_id: req.params.id,
             }
+
             const response = await this.postBusiness.dislikePost(input)
 
             res.status(200).send(response)

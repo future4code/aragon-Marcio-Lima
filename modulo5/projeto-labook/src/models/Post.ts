@@ -70,6 +70,7 @@ export interface IGetPostsPost {
     id: string
     content: string
     user_id: string
+    likes: number
 }
 
 export interface IGetPostsDBDTO {
@@ -85,13 +86,13 @@ export interface IGetPostsOutputDTO {
 }
 
 export interface ILikePostInputDTO {
-    token: string
-    postId: string
+    post_id: string
+    user_id: string
 }
 
 export interface IDislikePostInputDTO {
-    token: string
-    postId: string
+    post_id: string
+    user_id: string
 }
 
 export interface IDeletePostInputDTO {

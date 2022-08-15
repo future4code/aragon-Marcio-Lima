@@ -1,4 +1,10 @@
-import { IGetPostsDBDTO, ILikeDB, IPostDB, Post } from "../models/Post"
+import {
+    IGetPostsDBDTO,
+    ILikeDB,
+    ILikePostInputDTO,
+    IPostDB,
+    Post,
+} from "../models/Post"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class PostDatabase extends BaseDatabase {
@@ -47,30 +53,39 @@ export class PostDatabase extends BaseDatabase {
     }
 
     public deletePost = async (id: string) => {
+        await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
+            .delete()
+            .where({ user_id: id })
+
         await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
-            .select()
-            .where({ id })
+            .delete()
+            .where({ user_id: id })
     }
 
-    public likePost = async (input: ILikeDB) => {
+    public likePost = async (input: ILikePostInputDTO) => {
         const newLikeDB: ILikeDB = {
-            id: input.id,
-            post_id: input.post_id,
+            id: input.post_id,
             user_id: input.user_id,
+            post_id: input.post_id,
         }
 
-        await BaseDatabase.connection(PostDatabase.TABLE_LIKES).insert(
-            newLikeDB
+        await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
+            .update(newLikeDB)
+            .where({ id: newLikeDB.post_id })
+
+        await BaseDatabase.connection(PostDatabase.TABLE_POSTS).where(
+            "id",
+            "LIKE",
+            `%${input.post_id}%`
         )
     }
 
-    public findLikedPost = async (id: string, userId: string) => {
+    public findLikedPost = async (id: string) => {
         const likedPostDB: ILikeDB[] = await BaseDatabase.connection(
             PostDatabase.TABLE_LIKES
         )
             .select()
-            .where("user_id", "LIKE", `${userId}`)
-            .andWhere("post_id", "LIKE", `${id}`)
+            .where({ id })
 
         return likedPostDB[0]
     }
