@@ -170,10 +170,10 @@ BCRYPT_SALT_ROUNDS = 12
 -   [Projeto LabE-commerce Backend](https://github.com/future4code/aragon-Marcio-Lima/pull/53)
 -   [Katherine Peterson](https://readme.so/pt)
 
-### Documentação (links):
+### Documentação:
 
--   [Heroku]()
--   [Postman]()
+-   [Heroku](https://projeto-labook-marcio.herokuapp.com/ping)
+-   [Postman](https://documenter.getpostman.com/view/20789615/VUjSGjZb)
 
 ---
 
