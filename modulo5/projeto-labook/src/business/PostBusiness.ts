@@ -25,6 +25,7 @@ export class PostBusiness {
     public createPost = async (input: ICreatePostInputDTO) => {
         const token = input.token
         const content = input.content
+        const postId = this.idGenerator.generate()
 
         const payload = this.authenticator.getTokenPayload(token)
 
@@ -32,19 +33,17 @@ export class PostBusiness {
             throw new Error("Token inválido ou faltando")
         }
 
-        if (
-            !content ||
-            typeof content !== "string" ||
-            content.length < 1
-        ) {
+        if (!content) {
+            throw new Error("Parâmatro faltando")
+        }
+
+        if (typeof content !== "string" || content.length < 1) {
             throw new Error("Parâmetro 'content' inválido")
         }
 
-        const postId = this.idGenerator.generate()
         const userId = payload.id
-        const likes = 0
 
-        const post = new Post(postId, content, userId, likes)
+        const post = new Post(postId, content, userId)
 
         await this.postDatabase.createPost(post)
 
@@ -92,6 +91,7 @@ export class PostBusiness {
                 id: post.getId(),
                 content: post.getContent(),
                 user_id: post.getUserId(),
+                likes: post.getLikes(),
             }
 
             return postResponse
@@ -106,7 +106,7 @@ export class PostBusiness {
 
     public deletePost = async (input: IDeletePostInputDTO) => {
         const token = input.token
-        const idToDelete = input.idToDelete
+        const id = input.idToDelete
 
         const payload = this.authenticator.getTokenPayload(token)
 
@@ -114,9 +114,7 @@ export class PostBusiness {
             throw new Error("Token inválido ou faltando")
         }
 
-        const isPostExists = await this.postDatabase.findPostById(
-            idToDelete
-        )
+        const isPostExists = await this.postDatabase.findPostById(id)
 
         if (!isPostExists) {
             throw new Error("Post não encontrado")
@@ -130,7 +128,7 @@ export class PostBusiness {
             }
         }
 
-        await this.postDatabase.deletePost(idToDelete)
+        await this.postDatabase.deletePost(id)
 
         const response = {
             message: "Post deletado com sucesso",
@@ -140,8 +138,8 @@ export class PostBusiness {
     }
 
     public likePost = async (input: ILikePostInputDTO) => {
-        const token = input.token
-        const id = input.postId
+        const token = input.user_id
+        const postId = input.post_id
 
         const payload = this.authenticator.getTokenPayload(token)
 
@@ -149,26 +147,23 @@ export class PostBusiness {
             throw new Error("Token inválido ou faltando")
         }
 
-        const isPostExists = await this.postDatabase.findPostById(id)
+        const isPostExists = await this.postDatabase.findPostById(postId)
 
         if (!isPostExists) {
             throw new Error("Post não encontrado")
         }
 
-        const findLikedPost = await this.postDatabase.findLikedPost(
-            id,
-            payload.id
-        )
+        const findLikedPost = await this.postDatabase.findLikedPost(postId)
 
-        if (findLikedPost) {
+        if (payload.id === findLikedPost.post_id) {
             throw new Error("Impossível curtir o mesmo post duas vezes")
         }
 
         const likeId = this.idGenerator.generate()
 
-        const newLike: ILikeDB = {
+        const newLike = {
             id: likeId,
-            post_id: id,
+            post_id: postId,
             user_id: payload.id,
         }
 
@@ -182,8 +177,8 @@ export class PostBusiness {
     }
 
     public dislikePost = async (input: IDislikePostInputDTO) => {
-        const token = input.token
-        const id = input.postId
+        const token = input.user_id
+        const id = input.post_id
 
         const payload = this.authenticator.getTokenPayload(token)
 
@@ -197,10 +192,7 @@ export class PostBusiness {
             throw new Error("Post não encontrado")
         }
 
-        const findLikedPost = await this.postDatabase.findLikedPost(
-            id,
-            payload.id
-        )
+        const findLikedPost = await this.postDatabase.findLikedPost(id)
 
         if (!findLikedPost) {
             throw new Error("Curtir post")

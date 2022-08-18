@@ -1,26 +1,20 @@
-import { Request, Response } from "express"
-import { PostBusiness } from "../business/PostBusiness"
-import {
-    ICreatePostInputDTO,
-    IDeletePostInputDTO,
-    IDislikePostInputDTO,
-    IGetPostsInputDTO,
-    ILikePostInputDTO,
-} from "../models/Post"
+import { Request, Response } from "express";
+import { PostBusiness } from "../business/PostBusiness";
+import { IAddLikeInputDTO, ICreatePostInputDTO, IDeletePostInputDTO, IGetPostsInputDTO, IRemoveLikeInputDTO } from "../models/Post";
 
 export class PostController {
-    constructor(private postBusiness: PostBusiness) {}
+    constructor(
+        private postBusiness: PostBusiness
+    ) {}
 
     public createPost = async (req: Request, res: Response) => {
         try {
             const input: ICreatePostInputDTO = {
                 token: req.headers.authorization,
-                content: req.body.content,
-                userId: req.params.userId,
+                content: req.body.content
             }
 
             const response = await this.postBusiness.createPost(input)
-
             res.status(201).send(response)
         } catch (error) {
             res.status(400).send({ message: error.message })
@@ -30,16 +24,10 @@ export class PostController {
     public getPosts = async (req: Request, res: Response) => {
         try {
             const input: IGetPostsInputDTO = {
-                token: req.headers.authorization,
-                search: req.query.search as string,
-                order: req.query.order as string,
-                sort: req.query.sort as string,
-                limit: req.query.limit as string,
-                page: req.query.page as string,
+                token: req.headers.authorization
             }
 
             const response = await this.postBusiness.getPosts(input)
-
             res.status(200).send(response)
         } catch (error) {
             res.status(400).send({ message: error.message })
@@ -50,41 +38,38 @@ export class PostController {
         try {
             const input: IDeletePostInputDTO = {
                 token: req.headers.authorization,
-                idToDelete: req.params.id,
+                postId: req.params.id
             }
 
             const response = await this.postBusiness.deletePost(input)
-
             res.status(200).send(response)
         } catch (error) {
             res.status(400).send({ message: error.message })
         }
     }
 
-    public likePost = async (req: Request, res: Response) => {
+    public addLike = async (req: Request, res: Response) => {
         try {
-            const input: ILikePostInputDTO = {
-                user_id: req.headers.authorization,
-                post_id: req.params.id,
+            const input: IAddLikeInputDTO = {
+                token: req.headers.authorization,
+                postId: req.params.id
             }
 
-            const response = await this.postBusiness.likePost(input)
-
+            const response = await this.postBusiness.addLike(input)
             res.status(200).send(response)
         } catch (error) {
             res.status(400).send({ message: error.message })
         }
     }
 
-    public dislikePost = async (req: Request, res: Response) => {
+    public removeLike = async (req: Request, res: Response) => {
         try {
-            const input: IDislikePostInputDTO = {
-                user_id: req.headers.authorization,
-                post_id: req.params.id,
+            const input: IRemoveLikeInputDTO = {
+                token: req.headers.authorization,
+                postId: req.params.id
             }
 
-            const response = await this.postBusiness.dislikePost(input)
-
+            const response = await this.postBusiness.removeLike(input)
             res.status(200).send(response)
         } catch (error) {
             res.status(400).send({ message: error.message })

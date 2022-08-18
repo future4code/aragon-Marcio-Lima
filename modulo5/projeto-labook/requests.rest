@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "name": "Marcio",
-    "email": "marcio1@email.com",
+    "email": "marcio2@email.com",
     "password": "abc123"
 }
 
@@ -16,31 +16,31 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "marcio1@email.com",
+    "email": "marcio2@email.com",
     "password": "abc123"
 }
 
 ### Endpoint 3. Create post 
 POST http://localhost:3003/posts
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFhZmE4ZWI4LWExYjUtNDY1OS1hYjQ2LWY3Yzc3ZmVkYWQxMCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjA1MTk3NzIsImV4cCI6MTY2MDY5MjU3Mn0.zBspOdkWskR4vEE2Vex7900B-bowuZNByjagSnRXqPk
 Content-Type: application/json
 
 {
-    "content": "Houston, we have a problem"
+    "content": "Hakuna matata"
 }
 
 ### Endpoint 4. Get all posts
-GET http://localhost:3003/posts?search=hakuna
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
+GET http://localhost:3003/posts
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFhZmE4ZWI4LWExYjUtNDY1OS1hYjQ2LWY3Yzc3ZmVkYWQxMCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjA1MTk3NzIsImV4cCI6MTY2MDY5MjU3Mn0.zBspOdkWskR4vEE2Vex7900B-bowuZNByjagSnRXqPk
 
 ### Endpoint 5. Delete post
-DELETE http://localhost:3003/posts/d146523b-0633-44dc-8e10-9a8b4006d29d
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
+DELETE http://localhost:3003/posts/958861cc-9940-4fac-8050-80a21b54d421
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFhZmE4ZWI4LWExYjUtNDY1OS1hYjQ2LWY3Yzc3ZmVkYWQxMCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjA1MTk3NzIsImV4cCI6MTY2MDY5MjU3Mn0.zBspOdkWskR4vEE2Vex7900B-bowuZNByjagSnRXqPk
 
 ### Endpoint 6. Like post
 POST http://localhost:3003/posts/like/202
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFhZmE4ZWI4LWExYjUtNDY1OS1hYjQ2LWY3Yzc3ZmVkYWQxMCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjA1MTk3NzIsImV4cCI6MTY2MDY5MjU3Mn0.zBspOdkWskR4vEE2Vex7900B-bowuZNByjagSnRXqPk
 
 ### Endpoint 7. Dislke post
-DELETE http://localhost:3003/posts/dislike/d146523b-0633-44dc-8e10-9a8b4006d29d
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDcyZjJiLWM5YWUtNGY4NS05Yzk2LTdjODNiMmU2YTYyMyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjAzMTE3ODAsImV4cCI6MTY2MDQ4NDU4MH0.dSbKqJERkbQi8He1hdpY4UlM0t0xfhlM2uqRiUTNp1w
+DELETE http://localhost:3003/posts/dislike/202
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFhZmE4ZWI4LWExYjUtNDY1OS1hYjQ2LWY3Yzc3ZmVkYWQxMCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjA1MTk3NzIsImV4cCI6MTY2MDY5MjU3Mn0.zBspOdkWskR4vEE2Vex7900B-bowuZNByjagSnRXqPk

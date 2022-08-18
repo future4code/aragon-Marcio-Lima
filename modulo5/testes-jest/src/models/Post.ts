@@ -1,12 +1,12 @@
 export interface IPostDB {
-    id: string
-    content: string
+    id: string,
+    content: string,
     user_id: string
 }
 
 export interface ILikeDB {
-    id: string
-    post_id: string
+    id: string,
+    post_id: string,
     user_id: string
 }
 
@@ -52,50 +52,46 @@ export class Post {
 }
 
 export interface ICreatePostInputDTO {
-    token: string
+    token: string,
     content: string
-    userId: string
+}
+
+export interface ICreatePostOutputDTO {
+    message: string,
+    post: Post
 }
 
 export interface IGetPostsInputDTO {
     token: string
-    search: string
-    order: string
-    sort: string
-    limit: string
-    page: string
-}
-
-export interface IGetPostsPost {
-    id: string
-    content: string
-    user_id: string
-    likes: number
-}
-
-export interface IGetPostsDBDTO {
-    search: string
-    order: string
-    sort: string
-    limit: number
-    offset: number
 }
 
 export interface IGetPostsOutputDTO {
-    posts: IGetPostsPost[]
-}
-
-export interface ILikePostInputDTO {
-    post_id: string
-    user_id: string
-}
-
-export interface IDislikePostInputDTO {
-    post_id: string
-    user_id: string
+    posts: Post[]
 }
 
 export interface IDeletePostInputDTO {
-    token: string
-    idToDelete: string
+    token: string,
+    postId: string
+}
+
+export interface IDeletePostOutputDTO {
+    message: string
+}
+
+export interface IAddLikeInputDTO {
+    token: string,
+    postId: string
+}
+
+export interface IAddLikeOutputDTO {
+    message: string
+}
+
+export interface IRemoveLikeInputDTO {
+    token: string,
+    postId: string
+}
+
+export interface IRemoveLikeOutputDTO {
+    message: string
 }
