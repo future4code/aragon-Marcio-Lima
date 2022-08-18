@@ -2,6 +2,9 @@ import { IUserDB, User } from "../models/User"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class UserDatabase extends BaseDatabase {
+    static findById(id: string) {
+        throw new Error("Method not implemented.")
+    }
     public static TABLE_USERS = "Lama_Users"
 
     public toUserDBModel = (user: User) => {
@@ -16,7 +19,9 @@ export class UserDatabase extends BaseDatabase {
         return userDB
     }
 
-    public findByEmail = async (email: string) => {
+    public findByEmail = async (
+        email: string
+    ): Promise<IUserDB | undefined> => {
         const result: IUserDB[] = await BaseDatabase.connection(
             UserDatabase.TABLE_USERS
         )

@@ -1,12 +1,12 @@
 export interface IShowDB {
-    id: string,
-    band: string,
+    id: string
+    band: string
     starts_at: Date
 }
 
 export interface ITicketDB {
-    id: string,
-    show_id: string,
+    id: string
+    show_id: string
     user_id: string
 }
 
@@ -49,4 +49,23 @@ export class Show {
     public setTickets = (newTickets: number) => {
         this.tickets = newTickets
     }
+}
+
+export interface ICreateShowInputDTO {
+    token: string
+    band: string
+    startsAt: string
+}
+
+export interface ICreateShowOutputDTO {
+    message: string
+    show: Show
+}
+
+export interface IGetShowsInputDTO {
+    show: Show
+}
+
+export interface IGetShowsOutputDTO {
+    shows: Show[]
 }

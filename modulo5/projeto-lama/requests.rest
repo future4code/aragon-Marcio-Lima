@@ -1,3 +1,34 @@
-### Endpoint de teste
+### Endpoint teste
 GET http://localhost:3003/ping
 
+### Endpoint signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Márcio",
+    "email": "marcio@email.com",
+    "password": "123456"
+}
+
+### Endpoint login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "astrodev@gmail.com",
+    "password": "bananinha"
+}
+
+### Endpoint create show
+POST http://localhost:3003/shows
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MDc2NDA1NywiZXhwIjoxNjYwOTM2ODU3fQ.rBPf2Bcu4s23STyzSZejNJo4Vq_oOciyFXu1xUfukrI
+Content-Type: application/json
+
+{
+    "band": "El Efecto",
+    "startsAt": "2022/12/08"
+}
+
+### Endpoint get shows
+GET http://localhost:3003/shows
