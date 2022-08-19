@@ -16,6 +16,19 @@ export class ShowDatabaseMock extends BaseDatabase {
 
     public createShow = async (show: Show) => {}
 
+    public isDateAvailable = async (date: Date) => {
+        switch (date.getDate()) {
+            case 5:
+                return {
+                    id: "201",
+                    band: "Foo Fighters",
+                    starts_at: new Date("2022/12/05"),
+                } as IShowDB
+            default:
+                return undefined
+        }
+    }
+
     public getShows = async () => {
         const shows: IShowDB[] = [
             {

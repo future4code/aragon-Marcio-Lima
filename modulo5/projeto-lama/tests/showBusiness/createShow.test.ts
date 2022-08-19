@@ -73,7 +73,7 @@ describe("Testando ShowBusiness", () => {
         try {
             const input: ICreateShowInputDTO = {
                 token: "token-astrodev",
-                band: "Uriah Heep",
+                band: "Muse",
                 startsAt: "2022/12/04",
             }
 
@@ -83,6 +83,27 @@ describe("Testando ShowBusiness", () => {
                 expect(error.statusCode).toEqual(400)
                 expect(error.message).toEqual(
                     "Calma colega admin. O LAMA começa apenas dia 5 de dezembro"
+                )
+            }
+        }
+    })
+
+    test("retorna erro se a data estiver indisponível", async () => {
+        expect.assertions(2)
+
+        try {
+            const input: ICreateShowInputDTO = {
+                token: "token-astrodev",
+                band: "Uriah Heep",
+                startsAt: "2022/12/06",
+            }
+
+            await showBusiness.createShow(input)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                expect(error.statusCode).toEqual(400)
+                expect(error.message).toEqual(
+                    "Só pode existir um show por dia durante o evento"
                 )
             }
         }

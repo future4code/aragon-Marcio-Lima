@@ -40,6 +40,16 @@ export class ShowBusiness {
             throw new UnauthorizedError("Somente admins podem criar um show")
         }
 
+        const unavailableDate = await this.showDatabase.isDateAvailable(
+            new Date(startsAt)
+        )
+
+        if (unavailableDate) {
+            throw new RequestError(
+                "Só pode existir um show por dia durante o evento"
+            )
+        }
+
         if (startsAt < "2022/12/05") {
             throw new RequestError(
                 "Calma colega admin. O LAMA começa apenas dia 5 de dezembro"
@@ -146,19 +156,16 @@ export class ShowBusiness {
             throw new NotFoundError("Show não encontrado")
         }
 
-        const ticketIsAlreadyTaken = await this.showDatabase.findTicket(
-            showId,
-            payload.id
-        )
+        const isTicketExists = await this.showDatabase.findTicket(showId, payload.id)
 
-        if (!ticketIsAlreadyTaken) {
+        if (!isTicketExists) {
             throw new NotFoundError(
                 "Não há nada para remover, você ainda não comprou seu ingresso"
             )
         }
 
         if (payload.role === USER_ROLES.NORMAL) {
-            if (payload.id !== ticketIsAlreadyTaken.user_id) {
+            if (payload.id !== isTicketExists.user_id) {
                 throw new UnauthorizedError(
                     "Este recurso é disponível apenas para admins"
                 )

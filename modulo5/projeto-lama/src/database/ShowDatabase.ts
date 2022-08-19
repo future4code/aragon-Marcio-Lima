@@ -17,8 +17,17 @@ export class ShowDatabase extends BaseDatabase {
 
     public createShow = async (show: Show) => {
         const showDB = this.toShowDBModel(show)
-
         await BaseDatabase.connection(ShowDatabase.TABLE_SHOWS).insert(showDB)
+    }
+
+    public isDateAvailable = async (date: Date) => {
+        const availableDate: IShowDB[] = await BaseDatabase.connection(
+            ShowDatabase.TABLE_SHOWS
+        )
+            .select()
+            .where({ starts_at: date })
+
+        return availableDate[0]
     }
 
     public getShows = async () => {
