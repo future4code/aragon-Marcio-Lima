@@ -1,10 +1,10 @@
-import express from 'express'
-import cors from 'cors'
+import express from "express"
+import cors from "cors"
 import dotenv from "dotenv"
 
-import { pingRouter } from './router/pingRouter'
-import { showRouter } from './router/showRouter'
-import { userRouter } from './router/userRouter'
+import { pingRouter } from "./router/pingRouter"
+import { showRouter } from "./router/showRouter"
+import { userRouter } from "./router/userRouter"
 
 dotenv.config()
 

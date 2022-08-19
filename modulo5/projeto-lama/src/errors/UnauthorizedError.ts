@@ -1,9 +1,7 @@
-import { BaseError } from "./BaseError";
+import { BaseError } from "./BaseError"
 
 export class UnauthorizedError extends BaseError {
-    constructor(
-        message: string = "Credenciais inválidas"
-    ) {
+    constructor(message: string = "Credenciais inválidas") {
         super(401, message)
     }
 }

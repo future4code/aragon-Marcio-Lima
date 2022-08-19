@@ -69,3 +69,21 @@ export interface IGetShowsInputDTO {
 export interface IGetShowsOutputDTO {
     shows: Show[]
 }
+
+export interface IAddBookingInputDTO {
+    token: string
+    showId: string
+}
+
+export interface IAddBookingOutputDTO {
+    message: string
+}
+
+export interface IRemoveBookingInputDTO {
+    token: string
+    showId: string
+}
+
+export interface IRemoveBookingOutputDTO {
+    message: string
+}

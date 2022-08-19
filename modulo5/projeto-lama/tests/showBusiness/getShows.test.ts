@@ -19,8 +19,6 @@ describe("Testando ShowBusiness", () => {
         expect(response.shows.length).toEqual(3)
         expect(response.shows[0].getId()).toEqual("201")
         expect(response.shows[0].getBand()).toEqual("Foo Fighters")
-        expect(response.shows[0].getStartsAt()).toEqual(
-            new Date("2022/12/05")
-        )
+        expect(response.shows[0].getStartsAt()).toEqual(new Date("2022/12/05"))
     })
 })

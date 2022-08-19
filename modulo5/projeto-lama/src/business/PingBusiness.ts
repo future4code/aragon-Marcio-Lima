@@ -1,9 +1,9 @@
 export class PingBusiness {
     public ping = async () => {
         const response = {
-            message: "Pong!"
+            message: "Pong!",
         }
-        
+
         return response
     }
 }

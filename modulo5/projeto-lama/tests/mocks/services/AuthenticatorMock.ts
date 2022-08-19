@@ -3,7 +3,7 @@ import { ITokenPayload } from "../../../src/services/Authenticator"
 
 export class AuthenticatorMock {
     generateToken = (payload: ITokenPayload): string => {
-        switch(payload.id) {
+        switch (payload.id) {
             case "101":
                 return "token-astrodev"
             default:
@@ -12,16 +12,16 @@ export class AuthenticatorMock {
     }
 
     getTokenPayload = (token: string): ITokenPayload | null => {
-        switch(token) {
+        switch (token) {
             case "token-mock":
                 return {
                     id: "id-mock",
-                    role: USER_ROLES.NORMAL
+                    role: USER_ROLES.NORMAL,
                 }
             case "token-astrodev":
                 return {
                     id: "101",
-                    role: USER_ROLES.ADMIN
+                    role: USER_ROLES.ADMIN,
                 }
             default:
                 return null

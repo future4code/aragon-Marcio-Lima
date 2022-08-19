@@ -18,9 +18,7 @@ export class UserController {
             res.status(201).send(response)
         } catch (error: unknown) {
             if (error instanceof BaseError) {
-                return res
-                    .status(error.statusCode)
-                    .send({ message: error.message })
+                return res.status(error.statusCode).send({ message: error.message })
             }
 
             res.status(500).send({
@@ -37,12 +35,11 @@ export class UserController {
             }
 
             const response = await this.userBusiness.login(input)
+
             res.status(201).send(response)
         } catch (error: unknown) {
             if (error instanceof BaseError) {
-                return res
-                    .status(error.statusCode)
-                    .send({ message: error.message })
+                return res.status(error.statusCode).send({ message: error.message })
             }
 
             res.status(500).send({

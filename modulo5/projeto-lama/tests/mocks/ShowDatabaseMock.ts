@@ -38,40 +38,44 @@ export class ShowDatabaseMock extends BaseDatabase {
         return shows
     }
 
-    public getTickets = async () => {
-        const tickets: ITicketDB[] = [
-            {
-                id: "301",
-                show_id: "201",
-                user_id: "101",
-            },
-            {
-                id: "302",
-                show_id: "202",
-                user_id: "101",
-            },
-            {
-                id: "303",
-                show_id: "203",
-                user_id: "101",
-            },
-            {
-                id: "304",
-                show_id: "201",
-                user_id: "102",
-            },
-            {
-                id: "305",
-                show_id: "201",
-                user_id: "102",
-            },
-            {
-                id: "306",
-                show_id: "202",
-                user_id: "103",
-            },
-        ]
-
-        return tickets
+    public getTickets = async (showId: string) => {
+        switch (showId) {
+            case "201":
+                return 2
+            default:
+                return 0
+        }
     }
+
+    public findShowById = async (showId: string) => {
+        switch (showId) {
+            case "201":
+                return {
+                    id: "201",
+                    band: "Foo Fighters",
+                    starts_at: new Date("2022/12/05"),
+                }
+            default:
+                return undefined
+        }
+    }
+
+    public findTicket = async (showId: string, userId: string) => {
+        switch (showId) {
+            case "201":
+                return userId === "101"
+                    ? ({
+                          id: "301",
+                          show_id: "201",
+                          user_id: "101",
+                      } as ITicketDB)
+                    : undefined
+            default:
+                undefined
+        }
+    }
+
+    public addTicketBooking = async (ticketDB: ITicketDB) => {}
+
+    public removeTicketBooking = async (showId: string) => {}
 }

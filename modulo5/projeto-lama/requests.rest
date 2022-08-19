@@ -22,13 +22,20 @@ Content-Type: application/json
 
 ### Endpoint create show
 POST http://localhost:3003/shows
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MDc2NDA1NywiZXhwIjoxNjYwOTM2ODU3fQ.rBPf2Bcu4s23STyzSZejNJo4Vq_oOciyFXu1xUfukrI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MDg0ODk5MCwiZXhwIjoxNjYxMDIxNzkwfQ.5G3O6oEmfs8RfOa_jYpkxDL2l7Ph8UVk_eYbarpnVyw
 Content-Type: application/json
 
 {
-    "band": "El Efecto",
-    "startsAt": "2022/12/08"
+    "band": "Red Hot Chili Peppers",
+    "startsAt": "2022/12/10"
 }
 
 ### Endpoint get shows
 GET http://localhost:3003/shows
+
+### Endpoint add ticket booking
+POST http://localhost:3003/shows/tickets/201
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MDg0OTIyMCwiZXhwIjoxNjYxMDIyMDIwfQ.wq72wucrJoXNwcZ7Y8avLGsT4KycMoHw_V4bmCNc2rs
+### Endpoint remove ticket booking
+DELETE http://localhost:3003/shows/tickets/201
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MDg0OTIyMCwiZXhwIjoxNjYxMDIyMDIwfQ.wq72wucrJoXNwcZ7Y8avLGsT4KycMoHw_V4bmCNc2rs

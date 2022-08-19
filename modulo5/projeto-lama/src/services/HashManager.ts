@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs'
+import bcrypt from "bcryptjs"
 
 export class HashManager {
     public hash = async (plaintext: string): Promise<string> => {

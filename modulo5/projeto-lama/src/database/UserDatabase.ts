@@ -19,9 +19,7 @@ export class UserDatabase extends BaseDatabase {
         return userDB
     }
 
-    public findByEmail = async (
-        email: string
-    ): Promise<IUserDB | undefined> => {
+    public findByEmail = async (email: string): Promise<IUserDB | undefined> => {
         const result: IUserDB[] = await BaseDatabase.connection(
             UserDatabase.TABLE_USERS
         )
@@ -34,8 +32,6 @@ export class UserDatabase extends BaseDatabase {
     public createUser = async (user: User) => {
         const userDB = this.toUserDBModel(user)
 
-        await BaseDatabase.connection(UserDatabase.TABLE_USERS).insert(
-            userDB
-        )
+        await BaseDatabase.connection(UserDatabase.TABLE_USERS).insert(userDB)
     }
 }

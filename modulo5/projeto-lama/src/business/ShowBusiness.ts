@@ -1,12 +1,17 @@
-import { tickets } from "../database/migrations/data"
 import { ShowDatabase } from "../database/ShowDatabase"
+import { ConflictError } from "../errors/ConflictError"
+import { NotFoundError } from "../errors/NotFoundError"
 import { RequestError } from "../errors/RequestError"
 import { UnauthorizedError } from "../errors/UnauthorizedError"
 import {
+    IAddBookingInputDTO,
+    IAddBookingOutputDTO,
     ICreateShowInputDTO,
     ICreateShowOutputDTO,
-    IGetShowsInputDTO,
     IGetShowsOutputDTO,
+    IRemoveBookingInputDTO,
+    IRemoveBookingOutputDTO,
+    ITicketDB,
     Show,
 } from "../models/Show"
 import { USER_ROLES } from "../models/User"
@@ -32,23 +37,14 @@ export class ShowBusiness {
         }
 
         if (payload.role !== USER_ROLES.ADMIN) {
-            throw new UnauthorizedError(
-                "Somente admins podem criar um show"
-            )
+            throw new UnauthorizedError("Somente admins podem criar um show")
         }
 
-        if (typeof band !== "string") {
-            throw new RequestError("O nome da banda deve ser string")
-        }
-
-        if (band.length < 1) {
+        if (startsAt < "2022/12/05") {
             throw new RequestError(
-                "Nome da banda deve ter mais de 1 caractere"
+                "Calma colega admin. O LAMA começa apenas dia 5 de dezembro"
             )
         }
-
-        // - a data do show não pode ser anterior ao início do festival (5 de dezembro)
-        // - só pode existir um show por dia durante o evento
 
         const id = this.idGenerator.generate()
 
@@ -74,11 +70,105 @@ export class ShowBusiness {
         for (let show of shows) {
             const showId = show.getId()
             const tickets: any = await this.showDatabase.getTickets(showId)
-            show.setTickets(tickets)
+            show.setTickets(5000 - tickets)
         }
 
         const response: IGetShowsOutputDTO = {
             shows,
+        }
+
+        return response
+    }
+
+    public addTicketBooking = async (input: IAddBookingInputDTO) => {
+        const { token, showId } = input
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if (!payload) {
+            throw new UnauthorizedError("Não autenticado")
+        }
+
+        const showDB = await this.showDatabase.findShowById(showId)
+
+        if (!showDB) {
+            throw new NotFoundError("Show não encontrado")
+        }
+
+        const ticketIsAlreadyTaken = await this.showDatabase.findTicket(
+            showId,
+            payload.id
+        )
+
+        if (ticketIsAlreadyTaken) {
+            throw new ConflictError(
+                "Você já comprou este ingresso. Uma pessoa só pode reservar um ingresso por show"
+            )
+        }
+
+        const shows = await this.getShows()
+
+        const [ticketStock] = shows.shows.filter((show: any) => {
+            return show.id === showId
+        })
+
+        if (ticketStock.getTickets() < 1) {
+            throw new RequestError("Ingressos esgotados")
+        }
+
+        const ticketDB: ITicketDB = {
+            id: this.idGenerator.generate(),
+            show_id: showId,
+            user_id: payload.id,
+        }
+
+        await this.showDatabase.addTicketBooking(ticketDB)
+
+        const response: IAddBookingOutputDTO = {
+            message: "Pronto! Seu ingresso foi reservado com sucesso",
+        }
+
+        return response
+    }
+
+    public removeTicketBooking = async (input: IRemoveBookingInputDTO) => {
+        const { token, showId } = input
+
+        const payload = this.authenticator.getTokenPayload(token)
+
+        if (!payload) {
+            throw new UnauthorizedError("Não autenticado")
+        }
+
+        const showDB = await this.showDatabase.findShowById(showId)
+
+        if (!showDB) {
+            throw new NotFoundError("Show não encontrado")
+        }
+
+        const ticketIsAlreadyTaken = await this.showDatabase.findTicket(
+            showId,
+            payload.id
+        )
+
+        if (!ticketIsAlreadyTaken) {
+            throw new NotFoundError(
+                "Não há nada para remover, você ainda não comprou seu ingresso"
+            )
+        }
+
+        if (payload.role === USER_ROLES.NORMAL) {
+            if (payload.id !== ticketIsAlreadyTaken.user_id) {
+                throw new UnauthorizedError(
+                    "Este recurso é disponível apenas para admins"
+                )
+            }
+        }
+
+        await this.showDatabase.removeTicketBooking(showId)
+
+        const response: IRemoveBookingOutputDTO = {
+            message: "Reserva de ingresso removida com sucesso",
         }
 
         return response

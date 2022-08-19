@@ -54,9 +54,7 @@ export class UserBusiness {
             throw new RequestError("Parâmetro 'email' inválido")
         }
 
-        const isEmailAlreadyExists = await this.userDatabase.findByEmail(
-            email
-        )
+        const isEmailAlreadyExists = await this.userDatabase.findByEmail(email)
 
         if (isEmailAlreadyExists) {
             throw new ConflictError("Email já cadastrado")
@@ -65,13 +63,7 @@ export class UserBusiness {
         const id = this.idGenerator.generate()
         const hashedPassword = await this.hashManager.hash(password)
 
-        const user = new User(
-            id,
-            name,
-            email,
-            hashedPassword,
-            USER_ROLES.NORMAL
-        )
+        const user = new User(id, name, email, hashedPassword, USER_ROLES.NORMAL)
 
         await this.userDatabase.createUser(user)
 

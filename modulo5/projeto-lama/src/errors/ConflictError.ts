@@ -1,9 +1,7 @@
-import { BaseError } from "./BaseError";
+import { BaseError } from "./BaseError"
 
 export class ConflictError extends BaseError {
-    constructor(
-        message: string = "Recurso já existe"
-    ) {
+    constructor(message: string = "Recurso já existe") {
         super(409, message)
     }
 }
