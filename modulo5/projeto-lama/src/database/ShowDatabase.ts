@@ -20,14 +20,12 @@ export class ShowDatabase extends BaseDatabase {
         await BaseDatabase.connection(ShowDatabase.TABLE_SHOWS).insert(showDB)
     }
 
-    public isDateAvailable = async (date: Date) => {
-        const availableDate: IShowDB[] = await BaseDatabase.connection(
-            ShowDatabase.TABLE_SHOWS
-        )
+    public isDateAvailable = async (startsAt: Date) => {
+        const result = await BaseDatabase.connection(ShowDatabase.TABLE_SHOWS)
             .select()
-            .where({ starts_at: date })
+            .where({ starts_at: startsAt })
 
-        return availableDate[0]
+        return result[0]
     }
 
     public getShows = async () => {
@@ -68,8 +66,8 @@ export class ShowDatabase extends BaseDatabase {
         return ticketsDB[0]
     }
 
-    public addTicketBooking = async (ticketDB: ITicketDB) => {
-        await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS).insert(ticketDB)
+    public addTicketBooking = async (ticket: ITicketDB) => {
+        await BaseDatabase.connection(ShowDatabase.TABLE_TICKETS).insert(ticket)
     }
 
     public removeTicketBooking = async (showId: string) => {

@@ -44,15 +44,21 @@ export class ShowBusiness {
             new Date(startsAt)
         )
 
-        if (unavailableDate) {
+        if (new Date(startsAt) < new Date("2022/12/05")) {
             throw new RequestError(
-                "Só pode existir um show por dia durante o evento"
+                "Calma colega admin, segure sua empolgação. O LAMA começa apenas dia 5 de dezembro"
             )
         }
 
-        if (startsAt < "2022/12/05") {
+        if (new Date(startsAt) > new Date("2022/12/11")) {
             throw new RequestError(
-                "Calma colega admin. O LAMA começa apenas dia 5 de dezembro"
+                "Não é possível criar shows depois de 11 de dezembro"
+            )
+        }
+
+        if (unavailableDate) {
+            throw new RequestError(
+                "Só pode existir um show por dia durante o evento"
             )
         }
 
@@ -126,13 +132,13 @@ export class ShowBusiness {
             throw new RequestError("Ingressos esgotados")
         }
 
-        const ticketDB: ITicketDB = {
+        const ticket: ITicketDB = {
             id: this.idGenerator.generate(),
             show_id: showId,
             user_id: payload.id,
         }
 
-        await this.showDatabase.addTicketBooking(ticketDB)
+        await this.showDatabase.addTicketBooking(ticket)
 
         const response: IAddBookingOutputDTO = {
             message: "Pronto! Seu ingresso foi reservado com sucesso",

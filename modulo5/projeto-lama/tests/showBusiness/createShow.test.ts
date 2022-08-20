@@ -82,7 +82,28 @@ describe("Testando ShowBusiness", () => {
             if (error instanceof BaseError) {
                 expect(error.statusCode).toEqual(400)
                 expect(error.message).toEqual(
-                    "Calma colega admin. O LAMA começa apenas dia 5 de dezembro"
+                    "Calma colega admin, segure sua empolgação. O LAMA começa apenas dia 5 de dezembro"
+                )
+            }
+        }
+    })
+
+    test("retorna erro se o show for criado depois de 2022/12/11", async () => {
+        expect.assertions(2)
+
+        try {
+            const input: ICreateShowInputDTO = {
+                token: "token-astrodev",
+                band: "Muse",
+                startsAt: "2022/12/12",
+            }
+
+            await showBusiness.createShow(input)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                expect(error.statusCode).toEqual(400)
+                expect(error.message).toEqual(
+                    "Não é possível criar shows depois de 11 de dezembro"
                 )
             }
         }
@@ -95,7 +116,7 @@ describe("Testando ShowBusiness", () => {
             const input: ICreateShowInputDTO = {
                 token: "token-astrodev",
                 band: "Uriah Heep",
-                startsAt: "2022/12/06",
+                startsAt: "2022/12/05",
             }
 
             await showBusiness.createShow(input)

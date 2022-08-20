@@ -16,13 +16,25 @@ export class ShowDatabaseMock extends BaseDatabase {
 
     public createShow = async (show: Show) => {}
 
-    public isDateAvailable = async (date: Date) => {
-        switch (date.getDate()) {
+    public isDateAvailable = async (startsAt: Date) => {
+        switch (startsAt.getDate()) {
             case 5:
                 return {
                     id: "201",
                     band: "Foo Fighters",
                     starts_at: new Date("2022/12/05"),
+                }
+            case 6:
+                return {
+                    id: "202",
+                    band: "System of a Down",
+                    starts_at: new Date("2022/12/06"),
+                }
+            case 7:
+                return {
+                    id: "203",
+                    band: "Evanescence",
+                    starts_at: new Date("2022/12/07"),
                 } as IShowDB
             default:
                 return undefined
@@ -88,7 +100,7 @@ export class ShowDatabaseMock extends BaseDatabase {
         }
     }
 
-    public addTicketBooking = async (ticketDB: ITicketDB) => {}
+    public addTicketBooking = async (ticket: ITicketDB) => {}
 
     public removeTicketBooking = async (showId: string) => {}
 }
