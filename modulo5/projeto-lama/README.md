@@ -1,4 +1,4 @@
-![LAMA](https://user-images.githubusercontent.com/101565117/185765552-6106df15-4df8-4328-89eb-0ff7f8d84ca7.png)
+![festival LAMA](https://user-images.githubusercontent.com/101565117/185794853-b8aaa5aa-8b1c-4cc8-80d6-88b211363f2b.png)
 
 # Projeto LAMA
 
@@ -139,7 +139,7 @@ BCRYPT_SALT_ROUNDS = 12
 #### 5. Criação da reserva de ingresso (protegido)
 
 -   **Método:** `POST`
--   **Caminho:** `/shows/tickets/:id`
+-   **Caminho:** `/shows/:id`
 -   **Entrada:** `token de acesso, id do show a ser reservado`
 -   **Saída:** `mensagem de reserva realizada com sucesso`
 -   **Validações e regras de negócio:**
@@ -151,12 +151,12 @@ BCRYPT_SALT_ROUNDS = 12
 #### 6. Remoção da reserva de ingresso (protegido)
 
 -   **Método:** `DELETE`
--   **Caminho:**`/shows/tickets/:id`
+-   **Caminho:**`/shows/:id`
 -   **Entrada:** `token de acesso, id do show a ser removido`
 -   **Saída:** `mensagem de reserva removida com sucesso`
 -   **Validações e regras de negócio:**
-    -   `id do post que ganhará o like deve existir no sistema`
-    -   `se o post já estiver com o like da pessoa é retornado um erro`
+    -   `id do show reservado deve existir no banco de dados`
+    -   `a pessoa já deve ter reservado o ingresso`
 -   **Observação:** `este endpoint deve ser acessível apenas aos admins.`
 
 ---
@@ -171,7 +171,7 @@ BCRYPT_SALT_ROUNDS = 12
 ### Documentação (links):
 
 -   [Heroku](https://projeto-lama-marcio.herokuapp.com/shows)
--   [Postman](https://documenter.getpostman.com/view/20789615/VUqpscWw#351eae54-19f4-40d9-8038-78d3acc554ba)
+-   [Postman](https://documenter.getpostman.com/view/20789615/VUqpscWw)
 
 ### Coverage
 
