@@ -1,7 +1,7 @@
-import { IUserDB, User, USER_ROLES } from "../models/User"
-import { BaseDatabase } from "./BaseDatabase"
+import { BaseDatabase } from "../../src/database/BaseDatabase"
+import { IUserDB, User, USER_ROLES } from "../../src/models/User"
 
-export class UserDatabase extends BaseDatabase {
+export class UserDatabaseMock extends BaseDatabase {
     public static TABLE_USERS = "Amaro_Users"
 
     public toUserDBModel = (user: User) => {
@@ -50,9 +50,5 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
-    public createUser = async (user: User) => {
-        const userDB = this.toUserDBModel(user)
-
-        await BaseDatabase.connection(UserDatabase.TABLE_USERS).insert(userDB)
-    }
+    public createUser = async (user: User) => {}
 }

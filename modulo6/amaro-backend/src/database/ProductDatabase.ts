@@ -31,20 +31,18 @@ export class ProductDatabase extends BaseDatabase {
         return productsDB
     }
 
-    public getProductById = async (productId: string) => {
-        const productDB = await BaseDatabase.connection(
-            ProductDatabase.TABLE_PRODUCTS
-        )
+    public getProductById = async (id: string) => {
+        const result = await BaseDatabase.connection(ProductDatabase.TABLE_PRODUCTS)
             .select()
-            .where("id", "LIKE", `${productId}`)
+            .where({ id })
 
-        return productDB
+        return result
     }
 
     public searchProductsByName = async (q: string) => {
         const result = await BaseDatabase.connection(ProductDatabase.TABLE_PRODUCTS)
             .select()
-            .where("name", "LIKE", `%${q}%`)
+            .where("name", "=", `%${q}%`)
 
         return result
     }
@@ -79,7 +77,7 @@ export class ProductDatabase extends BaseDatabase {
         )
             .select()
             .where({ id: productId })
-
+        console.log(result)
         return result[0]
     }
 }

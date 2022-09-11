@@ -6,23 +6,19 @@ import {
     IGetProductsByIdInputDTO,
     IGetProductsByTagInputDTO,
     IGetProductsByTagOutputDTO,
-    IGetProductsInputDTO,
     IGetProductsOutputDTO,
     IPostProductInputDTO,
     IPostProductOutputDTO,
-    IProductDB,
     Product,
 } from "../models/Product"
 import { USER_ROLES } from "../models/User"
 import { Authenticator } from "../services/Authenticator"
-import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
 export class ProductBusiness {
     constructor(
         private productDatabase: ProductDatabase,
         private idGenerator: IdGenerator,
-        private hashManager: HashManager,
         private authenticator: Authenticator
     ) {}
 
@@ -84,17 +80,11 @@ export class ProductBusiness {
         return response
     }
 
-    public getProductById = async (input: IGetProductsByIdInputDTO) => {
-        const productId = input.productId
-
-        const productDB = await this.productDatabase.getProductById(productId)
-
-        const product = productDB.map((productDB) => {
-            return new Product(productDB.id, productDB.name)
-        })
+    public getProductById = async (id: string) => {
+        const productsDB = await this.productDatabase.getProductById(id)
 
         const response = {
-            product,
+            productsDB,
         }
 
         return response
@@ -110,10 +100,8 @@ export class ProductBusiness {
         return response
     }
 
-    public getProductsByTag = async (input: IGetProductsByTagInputDTO) => {
-        const search = input.search
-
-        const tag = await this.productDatabase.getTagId(search)
+    public findProductsByTag = async (tagName: string) => {
+        const tag = await this.productDatabase.getTagId(tagName)
 
         const tagId = tag.map((tag: any) => tag.id)
 

@@ -45,9 +45,22 @@ export class ProductController {
 
     public findProductsByName = async (req: Request, res: Response) => {
         try {
-            const search = req.query.q as string
+            const { name, tag } = req.query
 
-            const response = await this.productBusiness.findProductsByName(search)
+            let response = {}
+
+            if (name) {
+                response = await this.productBusiness.findProductsByName(
+                    name as string
+                )
+            }
+
+            if (tag) {
+                response = await this.productBusiness.findProductsByTag(
+                    tag as string
+                )
+            }
+
             res.status(200).send(response)
         } catch (error: unknown) {
             if (error instanceof BaseError) {
@@ -56,13 +69,11 @@ export class ProductController {
         }
     }
 
-    public fingProductsByTag = async (req: Request, res: Response) => {
+    public getProductById = async (req: Request, res: Response) => {
         try {
-            const input: IGetProductsByTagInputDTO = {
-                search: req.query.q as string,
-            }
+            const id = req.params.id as string
 
-            const response = await this.productBusiness.getProductsByTag(input)
+            const response = await this.productBusiness.getProductById(id)
             res.status(200).send(response)
         } catch (error: unknown) {
             if (error instanceof BaseError) {
@@ -70,4 +81,19 @@ export class ProductController {
             }
         }
     }
+
+    // public findProductsByTag = async (req: Request, res: Response) => {
+    //     try {
+    //         const input: IGetProductsByTagInputDTO = {
+    //             search: req.query.q as string,
+    //         }
+
+    //         const response = await this.productBusiness.findProductsByTag(input)
+    //         res.status(200).send(response)
+    //     } catch (error: unknown) {
+    //         if (error instanceof BaseError) {
+    //             return res.status(error.statusCode).send({ message: error.message })
+    //         }
+    //     }
+    // }
 }

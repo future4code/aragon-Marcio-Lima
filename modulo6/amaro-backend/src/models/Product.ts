@@ -49,14 +49,14 @@ export interface IGetProductsOutputDTO {
     products: Product[]
 }
 
+export interface IGetProductsByIdInputDTO {
+    productId: string
+}
+
 export interface IGetProductsByTagInputDTO {
     search: string
 }
 
 export interface IGetProductsByTagOutputDTO {
     products: IProductDB[]
-}
-
-export interface IGetProductsByIdInputDTO {
-    productId: string
 }

@@ -47,7 +47,7 @@ export class UserBusiness {
         }
 
         if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-            throw new RequestError("Email must be a valid e-mail address")
+            throw new RequestError("E-mail must be a valid e-mail address")
         }
 
         const isEmailAlreadyExists = await this.userDatabase.findByEmail(email)
@@ -94,7 +94,7 @@ export class UserBusiness {
         }
 
         if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-            throw new RequestError("Email must be a valid e-mail address")
+            throw new RequestError("E-mail must be a valid e-mail address")
         }
 
         const userDB = await this.userDatabase.findByEmail(email)

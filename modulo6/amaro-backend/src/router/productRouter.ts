@@ -3,7 +3,6 @@ import { ProductBusiness } from "../business/ProductBusiness"
 import { ProductController } from "../controller/ProductController"
 import { ProductDatabase } from "../database/ProductDatabase"
 import { Authenticator } from "../services/Authenticator"
-import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
 export const productRouter = Router()
@@ -12,7 +11,6 @@ const productController = new ProductController(
     new ProductBusiness(
         new ProductDatabase(),
         new IdGenerator(),
-        new HashManager(),
         new Authenticator()
     )
 )
@@ -20,4 +18,5 @@ const productController = new ProductController(
 productRouter.post("/", productController.registerProduct)
 productRouter.get("/", productController.getProducts)
 productRouter.get("/search", productController.findProductsByName)
-productRouter.get("/tag", productController.fingProductsByTag)
+productRouter.get("/:id", productController.getProductById)
+// productRouter.get("/:tag", productController.findProductsByTag)
