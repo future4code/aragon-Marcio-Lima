@@ -1,7 +1,11 @@
 import { Request, Response } from "express"
 import { ProductBusiness } from "../business/ProductBusiness"
 import { BaseError } from "../errors/BaseError"
-import { IPostProductInputDTO } from "../models/Product"
+import {
+    IGetProductsByIdInputDTO,
+    IGetProductsByTagInputDTO,
+    IPostProductInputDTO,
+} from "../models/Product"
 
 export class ProductController {
     constructor(private productBusiness: ProductBusiness) {}
@@ -11,6 +15,7 @@ export class ProductController {
             const input: IPostProductInputDTO = {
                 token: req.headers.authorization,
                 name: req.body.name,
+                tag: req.body.tag,
             }
             const response = await this.productBusiness.registerProduct(input)
 
@@ -33,8 +38,36 @@ export class ProductController {
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
             }
-            console.log(error)
+
             res.status(500).send({ message: "Unexpected error finding products" })
+        }
+    }
+
+    public findProductsByName = async (req: Request, res: Response) => {
+        try {
+            const search = req.query.q as string
+
+            const response = await this.productBusiness.findProductsByName(search)
+            res.status(200).send(response)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+        }
+    }
+
+    public fingProductsByTag = async (req: Request, res: Response) => {
+        try {
+            const input: IGetProductsByTagInputDTO = {
+                search: req.query.q as string,
+            }
+
+            const response = await this.productBusiness.getProductsByTag(input)
+            res.status(200).send(response)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
         }
     }
 }

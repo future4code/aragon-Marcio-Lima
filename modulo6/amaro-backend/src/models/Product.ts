@@ -18,22 +18,22 @@ export class Product {
     constructor(
         private id: string,
         private name: string,
-        private tags: string[] = []
+        private tag: string[] = []
     ) {}
 
     public getId = () => this.id
     public getName = () => this.name
-    public getTags = () => this.tags
+    public getTags = () => this.tag
 
     public setId = (newId: string) => (this.id = newId)
     public setName = (newName: string) => (this.name = newName)
-    public setTags = (newTags: string[]) => (this.tags = newTags)
+    public setTags = (newTag: string[]) => (this.tag = newTag)
 }
 
 export interface IPostProductInputDTO {
     token: string
     name: string
-    tag?: string
+    tag: string[]
 }
 
 export interface IPostProductOutputDTO {
@@ -47,6 +47,10 @@ export interface IGetProductsInputDTO {
 
 export interface IGetProductsOutputDTO {
     products: Product[]
+}
+
+export interface IGetProductsByTagInputDTO {
+    search: string
 }
 
 export interface IGetProductsByTagOutputDTO {

@@ -30,15 +30,47 @@ export class ProductDatabase extends BaseDatabase {
 
         return productsDB
     }
-    //criar getTags por name
-    public getTagsByName = async (tag: string) => {
-        const tagsDB: ITagDB[] = await BaseDatabase.connection(
+
+    public getProductById = async (productId: string) => {
+        const productDB = await BaseDatabase.connection(
+            ProductDatabase.TABLE_PRODUCTS
+        )
+            .select()
+            .where("id", "LIKE", `${productId}`)
+
+        return productDB
+    }
+
+    public searchProductsByName = async (q: string) => {
+        const result = await BaseDatabase.connection(ProductDatabase.TABLE_PRODUCTS)
+            .select()
+            .where("name", "LIKE", `%${q}%`)
+
+        return result
+    }
+
+    public getTagId = async (id: string) => {
+        const result: ITagDB[] = await BaseDatabase.connection(
             ProductDatabase.TABLE_TAGS
         )
             .select()
-            .where({ tag })
+            .where({ id })
 
-        return tagsDB
+        return result
+    }
+
+    public findProductsByTag = async (q: string) => {
+        const [result] = await BaseDatabase.connection.raw(`
+        SELECT Amaro_Products.id, Amaro_Products.name
+        FROM Amaro_Product_Tags
+        JOIN Amaro_Tags
+        ON Amaro_Product_Tags.tag_id = Amaro_Tags.id
+        JOIN Amaro_Products
+        ON Amaro_Product_Tags.products_id = Amaro_Products.id
+        WHERE Amaro_Product_Tags.tag_id = ${q}
+        `)
+
+        return result
     }
 
     public getTags = async (productId: string) => {

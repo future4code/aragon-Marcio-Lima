@@ -1,11 +1,11 @@
-import { tags } from "../database/migrations/data"
 import { ProductDatabase } from "../database/ProductDatabase"
 import { ForbiddenError } from "../errors/ForbiddenError"
-import { NotFoundError } from "../errors/NotFoundError"
 import { RequestError } from "../errors/RequestError"
 import { UnauthorizedError } from "../errors/UnauthorizedError"
 import {
     IGetProductsByIdInputDTO,
+    IGetProductsByTagInputDTO,
+    IGetProductsByTagOutputDTO,
     IGetProductsInputDTO,
     IGetProductsOutputDTO,
     IPostProductInputDTO,
@@ -51,10 +51,8 @@ export class ProductBusiness {
             throw new Error("Product name must be at least 3 characters")
         }
 
-        //enviar tag pelo nome, filtrar o resultado se vier vazio, criar uma nova tag
-
         const id = this.idGenerator.generate()
-        const product = new Product(id, name.toUpperCase())
+        const product = new Product(id, name.toUpperCase(), tag)
 
         await this.productDatabase.registerProduct(product)
 
@@ -66,20 +64,62 @@ export class ProductBusiness {
         return response
     }
 
-    public getProducts = async (input: IGetProductsInputDTO) => {
+    public getProducts = async (): Promise<IGetProductsOutputDTO> => {
         const productsDB = await this.productDatabase.getProducts()
 
         const products = productsDB.map((productDB: any) => {
-            return new Product(productDB.id, productDB.name)
+            return new Product(productDB.id, productDB.name, productDB.tag)
         })
 
         for (let product of products) {
-            const tags: any = await this.productDatabase.getTags(product.getId())
-
+            const productId = product.getId()
+            const tags = await this.productDatabase.getTags(productId)
             product.setTags(tags)
         }
 
         const response: IGetProductsOutputDTO = {
+            products,
+        }
+
+        return response
+    }
+
+    public getProductById = async (input: IGetProductsByIdInputDTO) => {
+        const productId = input.productId
+
+        const productDB = await this.productDatabase.getProductById(productId)
+
+        const product = productDB.map((productDB) => {
+            return new Product(productDB.id, productDB.name)
+        })
+
+        const response = {
+            product,
+        }
+
+        return response
+    }
+
+    public findProductsByName = async (search: string) => {
+        const productsDB = await this.productDatabase.searchProductsByName(search)
+
+        const response = {
+            productsDB,
+        }
+
+        return response
+    }
+
+    public getProductsByTag = async (input: IGetProductsByTagInputDTO) => {
+        const search = input.search
+
+        const tag = await this.productDatabase.getTagId(search)
+
+        const tagId = tag.map((tag: any) => tag.id)
+
+        const products = await this.productDatabase.findProductsByTag(tagId[0])
+
+        const response: IGetProductsByTagOutputDTO = {
             products,
         }
 
