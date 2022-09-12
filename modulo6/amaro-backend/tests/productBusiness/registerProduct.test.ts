@@ -13,116 +13,112 @@ describe("Testando ProductBusiness", () => {
         new AuthenticatorMock()
     )
 
-    // test("criação de show bem sucedida", async () => {
-    //     const input: IPostProductInputDTO = {
-    //         token: "token-astrodev",
-    //         name: "Astrodev",
-    //         tag: ["101"],
-    //     }
+    test("criação de produto bem sucedida", async () => {
+        const input: IPostProductInputDTO = {
+            token: "token-astrodev",
+            name: "VESTIDO TRICOT CHEVRON",
+            tag: ["101"],
+        }
 
-    //     const response = await ProductBusiness.registerProduct(input)
+        const response = await productBusiness.registerProduct(input)
 
-    //     expect(response.product.getId()).toEqual("id-mock")
-    //     expect(response.show.getBand()).toEqual("El Efecto")
-    //     expect(response.message).toEqual("Show criado com sucesso")
-    // })
+        expect(response.product.getId()).toEqual("id-mock")
+        expect(response.product.getName()).toEqual("VESTIDO TRICOT CHEVRON")
+        expect(response.message).toEqual("Product registered successfully")
+    })
 
     // test("retorna erro se o usuário não estiver logado", async () => {
     //     expect.assertions(2)
 
     //     try {
-    //         const input: ICreateShowInputDTO = {
-    //             token: "token-mock3",
-    //             band: "El Efecto",
-    //             startsAt: "2022/12/08",
+    //         const input: IPostProductInputDTO = {
+    //             token: "meu-token",
+    //             name: "VESTIDO TRICOT CHEVRON",
+    //             tag: ["101"],
     //         }
 
-    //         await showBusiness.createShow(input)
+    //         await productBusiness.registerProduct(input)
     //     } catch (error: unknown) {
     //         if (error instanceof BaseError) {
     //             expect(error.statusCode).toEqual(401)
-    //             expect(error.message).toEqual("Não autenticado")
+    //             expect(error.message).toEqual("Invalid or missing token")
     //         }
     //     }
     // })
 
-    // test("retorna erro se um usuário normal tentar criar um show", async () => {
+    test("retorna erro se um usuário normal tentar criar um produto", async () => {
+        expect.assertions(2)
+
+        try {
+            const input: IPostProductInputDTO = {
+                token: "token-mock",
+                name: "VESTIDO TRICOT CHEVRON",
+                tag: ["101"],
+            }
+
+            await productBusiness.registerProduct(input)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                expect(error.statusCode).toEqual(403)
+                expect(error.message).toEqual("Only admins can register products")
+            }
+        }
+    })
+
+    // test("retorna erro o produto tive um valor inválido", async () => {
     //     expect.assertions(2)
 
     //     try {
-    //         const input: ICreateShowInputDTO = {
+    //         const input: IPostProductInputDTO = {
+    //             token: "token-Astrodev",
+    //             name: "",
+    //             tag: ["101"],
+    //         }
+
+    //         await productBusiness.registerProduct(input)
+    //     } catch (error: unknown) {
+    //         if (error instanceof BaseError) {
+    //             expect(error.statusCode).toEqual(404)
+    //             expect(error.message).toEqual("Missing parameters")
+    //         }
+    //     }
+    // })
+
+    // test("retorna erro se o nome não for uma string", async () => {
+    //     expect.assertions(2)
+
+    //     try {
+    //         const input: IPostProductInputDTO = {
     //             token: "token-mock",
-    //             band: "Ska-P",
-    //             startsAt: "2022/12/09",
+    //             name: "",
+    //             tag: ["101"],
     //         }
 
-    //         await showBusiness.createShow(input)
+    //         await productBusiness.registerProduct(input)
     //     } catch (error: unknown) {
     //         if (error instanceof BaseError) {
-    //             expect(error.statusCode).toEqual(401)
-    //             expect(error.message).toEqual("Somente admins podem criar um show")
+    //             expect(error.statusCode).toEqual(400)
+    //             expect(error.message).toEqual("Invalid parameter")
     //         }
     //     }
     // })
 
-    // test("retorna erro se o show for criado antes de 2022/12/05", async () => {
+    // test("retorna erro se o nome do produto tiver menos de 3 caracteres", async () => {
     //     expect.assertions(2)
 
     //     try {
-    //         const input: ICreateShowInputDTO = {
-    //             token: "token-astrodev",
-    //             band: "Muse",
-    //             startsAt: "2022/12/04",
+    //         const input: IPostProductInputDTO = {
+    //             token: "token-mock",
+    //             name: "VE",
+    //             tag: ["101"],
     //         }
 
-    //         await showBusiness.createShow(input)
+    //         await productBusiness.registerProduct(input)
     //     } catch (error: unknown) {
     //         if (error instanceof BaseError) {
     //             expect(error.statusCode).toEqual(400)
     //             expect(error.message).toEqual(
-    //                 "Calma colega admin, segure sua empolgação. O LAMA começa apenas dia 5 de dezembro"
-    //             )
-    //         }
-    //     }
-    // })
-
-    // test("retorna erro se o show for criado depois de 2022/12/11", async () => {
-    //     expect.assertions(2)
-
-    //     try {
-    //         const input: ICreateShowInputDTO = {
-    //             token: "token-astrodev",
-    //             band: "Muse",
-    //             startsAt: "2022/12/12",
-    //         }
-
-    //         await showBusiness.createShow(input)
-    //     } catch (error: unknown) {
-    //         if (error instanceof BaseError) {
-    //             expect(error.statusCode).toEqual(400)
-    //             expect(error.message).toEqual(
-    //                 "Não é possível criar shows depois de 11 de dezembro"
-    //             )
-    //         }
-    //     }
-    // })
-
-    // test("retorna erro se a data estiver indisponível", async () => {
-    //     expect.assertions(2)
-
-    //     try {
-    //         const input: ICreateShowInputDTO = {
-    //             token: "token-astrodev",
-    //             band: "Uriah Heep",
-    //             startsAt: "2022/12/05",
-    //         }
-
-    //         await showBusiness.createShow(input)
-    //     } catch (error: unknown) {
-    //         if (error instanceof BaseError) {
-    //             expect(error.statusCode).toEqual(400)
-    //             expect(error.message).toEqual(
-    //                 "Só pode existir um show por dia durante o evento"
+    //                 "Product name must be at least 3 characters"
     //             )
     //         }
     //     }

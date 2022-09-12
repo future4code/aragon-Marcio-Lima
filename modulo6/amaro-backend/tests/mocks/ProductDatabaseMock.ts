@@ -46,10 +46,12 @@ export class ProductDatabaseMock extends BaseDatabase {
     }
 
     public searchProductsByName = async (q: string) => {
-        switch (q) {
-            case "VESTIDO TRICOT CHEVRON":
-                return
-        }
+        // switch (q) {
+        //     case "VESTIDO TRICOT CHEVRON":
+        //         return
+        //     default:
+        //         return undefined
+        // }
     }
 
     public getTagId = async (id: string) => {}

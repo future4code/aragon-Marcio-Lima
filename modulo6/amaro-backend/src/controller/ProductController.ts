@@ -1,11 +1,7 @@
 import { Request, Response } from "express"
 import { ProductBusiness } from "../business/ProductBusiness"
 import { BaseError } from "../errors/BaseError"
-import {
-    IGetProductsByIdInputDTO,
-    IGetProductsByTagInputDTO,
-    IPostProductInputDTO,
-} from "../models/Product"
+import { IPostProductInputDTO } from "../models/Product"
 
 export class ProductController {
     constructor(private productBusiness: ProductBusiness) {}
@@ -45,22 +41,9 @@ export class ProductController {
 
     public findProductsByName = async (req: Request, res: Response) => {
         try {
-            const { name, tag } = req.query
+            const search = req.query.q as string
 
-            let response = {}
-
-            if (name) {
-                response = await this.productBusiness.findProductsByName(
-                    name as string
-                )
-            }
-
-            if (tag) {
-                response = await this.productBusiness.findProductsByTag(
-                    tag as string
-                )
-            }
-
+            const response = await this.productBusiness.findProductsByName(search)
             res.status(200).send(response)
         } catch (error: unknown) {
             if (error instanceof BaseError) {
@@ -81,19 +64,4 @@ export class ProductController {
             }
         }
     }
-
-    // public findProductsByTag = async (req: Request, res: Response) => {
-    //     try {
-    //         const input: IGetProductsByTagInputDTO = {
-    //             search: req.query.q as string,
-    //         }
-
-    //         const response = await this.productBusiness.findProductsByTag(input)
-    //         res.status(200).send(response)
-    //     } catch (error: unknown) {
-    //         if (error instanceof BaseError) {
-    //             return res.status(error.statusCode).send({ message: error.message })
-    //         }
-    //     }
-    // }
 }

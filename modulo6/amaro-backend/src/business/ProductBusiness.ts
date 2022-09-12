@@ -1,11 +1,9 @@
 import { ProductDatabase } from "../database/ProductDatabase"
 import { ForbiddenError } from "../errors/ForbiddenError"
+import { NotFoundError } from "../errors/NotFoundError"
 import { RequestError } from "../errors/RequestError"
 import { UnauthorizedError } from "../errors/UnauthorizedError"
 import {
-    IGetProductsByIdInputDTO,
-    IGetProductsByTagInputDTO,
-    IGetProductsByTagOutputDTO,
     IGetProductsOutputDTO,
     IPostProductInputDTO,
     IPostProductOutputDTO,
@@ -36,7 +34,7 @@ export class ProductBusiness {
         }
 
         if (!name) {
-            throw new RequestError("Missing parameters")
+            throw new NotFoundError("Missing parameters")
         }
 
         if (typeof name !== "string") {
@@ -44,7 +42,7 @@ export class ProductBusiness {
         }
 
         if (name.length < 3) {
-            throw new Error("Product name must be at least 3 characters")
+            throw new RequestError("Product name must be at least 3 characters")
         }
 
         const id = this.idGenerator.generate()
@@ -96,21 +94,6 @@ export class ProductBusiness {
         const response = {
             productsDB,
         }
-
-        return response
-    }
-
-    public findProductsByTag = async (tagName: string) => {
-        const tag = await this.productDatabase.getTagId(tagName)
-
-        const tagId = tag.map((tag: any) => tag.id)
-
-        const products = await this.productDatabase.findProductsByTag(tagId[0])
-
-        const response: IGetProductsByTagOutputDTO = {
-            products,
-        }
-
         return response
     }
 }

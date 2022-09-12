@@ -42,7 +42,7 @@ export class ProductDatabase extends BaseDatabase {
     public searchProductsByName = async (q: string) => {
         const result = await BaseDatabase.connection(ProductDatabase.TABLE_PRODUCTS)
             .select()
-            .where("name", "=", `%${q}%`)
+            .where("name", "LIKE", `%${q}%`)
 
         return result
     }
@@ -57,27 +57,13 @@ export class ProductDatabase extends BaseDatabase {
         return result
     }
 
-    public findProductsByTag = async (q: string) => {
-        const [result] = await BaseDatabase.connection.raw(`
-        SELECT Amaro_Products.id, Amaro_Products.name
-        FROM Amaro_Product_Tags
-        JOIN Amaro_Tags
-        ON Amaro_Product_Tags.tag_id = Amaro_Tags.id
-        JOIN Amaro_Products
-        ON Amaro_Product_Tags.products_id = Amaro_Products.id
-        WHERE Amaro_Product_Tags.tag_id = ${q}
-        `)
-
-        return result
-    }
-
     public getTags = async (productId: string) => {
         const result: any[] = await BaseDatabase.connection(
             ProductDatabase.TABLE_TAGS
         )
             .select()
             .where({ id: productId })
-        console.log(result)
+
         return result[0]
     }
 }
