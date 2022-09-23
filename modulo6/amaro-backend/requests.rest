@@ -1,0 +1,41 @@
+### Test endpoint
+GET http://localhost:3003/ping
+
+### Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Márcio",
+    "email": "mvl0@gmail.com",
+    "password": "123456"
+}
+
+### Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "astrodev@gmail.com",
+    "password": "bananinha"
+}
+
+### Register product
+POST http://localhost:3003/products
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2Mjc1ODk3MywiZXhwIjoxNjYyOTMxNzczfQ.z_R1PuuCvqWh2_FwxmDZMUxMrAdARXKLmrlssPq-7OY
+Content-Type: application/json
+
+{
+    "name": "Bota de couro",
+    "tag": ["calçados", "inverno"]
+}
+
+### Get all products
+GET http://localhost:3003/products
+
+### Find products by name
+GET http://localhost:3003/products/search?q=tricot
+
+### Find products by id
+GET http://localhost:3003/products/8083
+
